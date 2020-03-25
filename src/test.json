@@ -1,0 +1,118 @@
+{
+  "registrationForm": {
+    "isProfileExist": true,
+    "code": "demo",
+    "grantPermission": "true",
+    "acquireAccess": "true",
+    "termsAndCondition": "true",
+    "account": {
+      "email": "aconnelly@example.net"
+    },
+    "user": {
+      "familyName": "Erdman",
+      "firstName": "Janet",
+      "middleName": null,
+      "lastName": "Erdman",
+      "suffix": "Dr."
+    },
+    "address": {
+      "streetAddress": "5488 Shany Common Apt. 028\nLake Jedediahhaven, UT 58242",
+      "city": "Bertrandbury",
+      "state": 1,
+      "zip": "27703",
+      "primaryPhone": "1-723-641-8573",
+      "cellPhone": null
+    },
+    "students": {
+      "studentFirstName_0": "Justus",
+      "studentMiddleName_0": null,
+      "studentLastName_0": "Mayer",
+      "suffix_0": null,
+      "school_0": 1,
+      "grade_0": 3,
+      "lwp_0": null,
+      "homeRoom_0": null,
+      "sports_0": null,
+      "studentFirstName_1": "Sydney",
+      "studentMiddleName_1": null,
+      "studentLastName_1": "Hilpert",
+      "suffix_1": null,
+      "school_1": 2,
+      "grade_1": 5,
+      "lwp_1": null,
+      "homeRoom_1": null,
+      "sports_1": null,
+      "studentFirstName_2": "Marc",
+      "studentMiddleName_2": null,
+      "studentLastName_2": "Pacocha",
+      "suffix_2": null,
+      "school_2": 3,
+      "grade_2": 4,
+      "lwp_2": null,
+      "homeRoom_2": null,
+      "sports_2": null
+    },
+    "payment": {
+      "items": [
+        {
+          "domain_id": 1,
+          "domain": "Wolff LLC",
+          "school_id": 1,
+          "school": "Heaney Ltd",
+          "member_fee": "10.00"
+        },
+        {
+          "domain_id": 1,
+          "domain": "Wolff LLC",
+          "school_id": 2,
+          "school": "Howell-Heathcote",
+          "member_fee": "15.00"
+        },
+        {
+          "domain_id": 1,
+          "domain": "Wolff LLC",
+          "school_id": 3,
+          "school": "Feil-Block",
+          "member_fee": "20.00"
+        }
+      ],
+      "total": "45.00",
+      "paymentMethod": {
+        "method": "stripe",
+        "meta": {
+          "id": "tok_1GPruAJrXytTw8Fz23v6ULMZ",
+          "object": "token",
+          "card": {
+            "id": "card_1GPruAJrXytTw8FzzcNaCMjf",
+            "object": "card",
+            "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
+            "address_state": null,
+            "address_zip": "78500",
+            "address_zip_check": "unchecked",
+            "brand": "Visa",
+            "country": "US",
+            "cvc_check": "unchecked",
+            "dynamic_last4": null,
+            "exp_month": 12,
+            "exp_year": 2023,
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": [],
+            "name": null,
+            "tokenization_method": null
+          },
+          "client_ip": "196.195.60.204",
+          "created": 1584976170,
+          "livemode": false,
+          "type": "card",
+          "used": false
+        }
+      }
+    }
+  }
+}
+

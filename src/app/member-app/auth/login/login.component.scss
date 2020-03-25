@@ -1,0 +1,28 @@
+.login-form--container {
+ margin: 3% 0;
+}
+
+/* todo: duplicate with .register-card */
+.login-card {
+  width: 25rem;
+}
+
+mat-form-field {
+  width: 87%;
+}
+
+/* todo: duplicate with register */
+.login-bg {
+  background: url(/assets/img/mobile-login-bg.jpg) no-repeat center 15%;
+
+}
+
+
+mat-card-actions > div {
+  margin: 1.5rem 0;
+}
+
+mat-card-actions button, mat-card-actions a {
+  width: 20rem;
+  text-transform: uppercase;
+}

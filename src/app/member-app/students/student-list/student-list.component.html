@@ -1,0 +1,34 @@
+<mat-action-list>
+
+</mat-action-list>
+
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let stdClass of students; let i = index">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="flex-column justify-content-center">
+        {{stdClass.className}}
+      </mat-panel-title>
+      <mat-panel-description class="flex-row justify-content-end">
+        <button mat-mini-fab color="primary">
+          <mat-icon aria-label="Send email to class">email</mat-icon>
+        </button>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-card *ngFor="let student of stdClass.students; let j = index">
+      <mat-card-content>
+        <button mat-button class="text-left w-100" (click)="loadDetail(i,j)">
+          <div class="row">
+            <div class="col-3">{{student.lastName}}</div>
+            <div class="col-9">{{student.firstName}}</div>
+
+          </div>
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-expansion-panel>
+
+
+</mat-accordion>

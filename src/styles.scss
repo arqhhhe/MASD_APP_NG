@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+//button {
+//    background: none;
+//    border: none;
+//}
+
+.v-aligin-with-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.v-aligin-with-icon mat-icon{
+    margin: 0 0.5rem;
+}
+
+
+.mat-toolbar {
+    margin: 0 -15px;
+}
+
+.mat-toolbar-multiple-rows {
+    width: auto !important;
+}
+
+// todo: find better solution for following two classes
+.mat-sidenav-container[fullscreen] {
+    top: 100px !important;
+    bottom: 100px !important;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 100px;
+    line-height: 20px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+    margin: 0 -15px;
+    font-size: 12px;
+    padding-top: 10px;
+
+}
+
+.logo--footer {
+    padding-left: 10px;
+}
+
+.w-115 {
+    width: 115% !important;
+}

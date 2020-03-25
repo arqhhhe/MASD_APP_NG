@@ -1,0 +1,56 @@
+<div *ngIf="parent">
+<!--  <div>-->
+<!--    <a mat-button type="button" href="/parents">Back to parents</a>-->
+<!--  </div>-->
+<div class="family-title">
+    <div class="family-box">
+        <div class="row">
+            <div class="col title">
+                <div>{{parent.family.name}} Family</div>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col col-sm-3">Address</div>
+            <div class="col">
+                <div>{{parent.family.address}}</div>
+                <!--<div>{{parent.address2}}</div>-->
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col col-sm-3">Home Phone</div>
+            <div class="col">{{parent.phone}}</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="family-detail">
+    <div class="parent-box" *ngFor="let gaurdian of parent.parents">
+        <div class="row">
+            <div class="col title">{{gaurdian.first_name}} {{gaurdian.last_name}}</div>
+        </div>
+        <div class="row content">
+            <div class="col col-sm-3">Email</div>
+            <div class="col">{{gaurdian.email}}</div>
+        </div>
+        <div class="row content">
+            <div class="col col-sm-3">Cell Phone</div>
+            <div class="col">{{gaurdian.phone}}</div>
+        </div>
+    </div>
+
+
+
+
+    <div class="children" *ngFor="let child of parent.students">
+        <div class="row">
+            <div class="col title">{{child.first_name}} {{child.last_name}}</div>
+        </div>
+        <div class="row">
+            <div class="col content">{{child.grade}}</div>
+        </div>
+    </div>
+
+
+</div>
+</div>

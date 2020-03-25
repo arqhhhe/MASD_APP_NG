@@ -1,0 +1,48 @@
+.register-form--container {
+    margin: 3% 0;
+}
+
+/* todo: duplicate with .login-card */
+.register-card {
+    width: 30rem;
+}
+
+/* todo: duplicate in login */
+mat-form-field {
+    width: 90%;
+}
+
+.students-card:nth-child(even) {
+    background: whitesmoke;
+}
+
+.students-card:nth-child(odd) {
+    background: floralwhite;
+}
+
+.mobile-arq-icon {
+    background-image: url('/assets/img/favicon.ico');
+    background-size: cover;
+  margin-top: 0.5rem;
+}
+
+.login-bg {
+  background: url(/assets/img/mobile-login-bg.jpg) no-repeat center -15%;
+}
+
+.tnc-container > .row {
+  margin: 1rem 0;
+}
+
+.tnc-container {
+  font-size: small;
+}
+
+.tnc-container strong {
+  font-weight: 500 ;
+}
+
+.stripe-payment-button-wrapper {
+  margin: 1.5rem 0;
+}
+

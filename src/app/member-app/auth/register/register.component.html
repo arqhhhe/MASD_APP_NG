@@ -1,0 +1,595 @@
+<div class="container justify-content-center align-items-center login-bg">
+
+  <div class="row">
+    <div class="col register-form--container d-flex flex-row justify-content-center">
+      <form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm">
+        <input type="hidden" [ngModel]="isProfileExist" name="isProfileExist">
+        <mat-card class="register-card">
+          <mat-card-header class="justify-content-center">
+            <div mat-card-avatar class="mobile-arq-icon"></div>
+            <mat-card-title class="text-left">Register</mat-card-title>
+            <mat-card-subtitle>Fill your member profile</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="justify-content-center">
+
+            <mat-vertical-stepper linear #stepper>
+              <!--                            <mat-step [stepControl]="code">-->
+              <mat-step [completed]="isCodeCompleted" [editable]="isEditable">
+                <ng-template matStepLabel class="lead">Security Code</ng-template>
+                <div class="form-group">
+                  <mat-form-field>
+                    <mat-label>Code</mat-label>
+                    <input matInput
+                           placeholder=""
+                           ngModel
+                           type="text"
+                           name="code"
+                           #code="ngModel"
+                           required>
+                    <mat-icon matSuffix>vpn_key</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                    <mat-error *ngIf="code.invalid">Invalid Code!</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="d-flex flex-row justify-content-end">
+                  <button mat-button type="button" (click)="onValidateCode(stepper, code.value)">Next</button>
+                </div>
+              </mat-step>
+              <mat-step [completed]="isConsentCompleted" [editable]="isEditable">
+                <ng-template matStepLabel class="lead">Consents</ng-template>
+                <div class="text-left tnc-container form-group">
+                  <div class="row">
+                    <div class="col-1">
+                      <mat-checkbox ngModel="true" name="grantPermission" [checked]="true"
+                                    #grantPermission></mat-checkbox>
+                    </div>
+                    <div class="col">
+                      <strong>I grant MobileArq permission</strong> to use the contact information
+                      I have provided/will provide,
+                      in this online 2017-18 school directory (<a href="#"><strong>Learn
+                      More</strong></a>).
+                      The information contained in this directory is intended for personal use
+                      only.
+                      <strong>I agree not to distribute this directory in any form to any third
+                        parties</strong> for any purpose
+                      <strong>including commercial use</strong>. I understand that my access to my
+                      school directories will be discontinued
+                      if I distribute the data/personal information contained in the school
+                      directories. *
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <mat-checkbox ngModel="true" name="acquireAccess" [checked]="true" #acquireAccess></mat-checkbox>
+                    </div>
+                    <div class="col">
+                      I would like access to the mobile directory.
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <mat-checkbox ngModel="true" name="termsAndCondition" [checked]="true"
+                                    #termsAndCondition></mat-checkbox>
+                    </div>
+                    <div class="col">
+                      I agree to the <a href="#">terms of service</a> and use, <strong>including
+                      the prohibition on using
+                      or transmitting information in the school directories to outside third
+                      parties and/or businesses.</strong>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+
+                    </div>
+                    <div class="col">
+                      No part of this directory may be reproduced in any manner, stored in any
+                      retrieval system, or transmitted in any form or by any means, electronic,
+                      mechanical, photocopying or otherwise without the prior written permission
+                      of
+                      the . The information in the directory is provided by the families listed
+                      for
+                      their private use. <strong>Any individual user who distributes the contact
+                      information
+                      contained in the school directories to promote businesses will lose their
+                      access
+                      to the school directories.</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                  <button mat-button matStepperPrevious type="button">Back</button>
+                  <button mat-button type="button"
+                          (click)="onValidateConsent(stepper, grantPermission, acquireAccess, termsAndCondition)">Next
+                  </button>
+                </div>
+              </mat-step>
+              <mat-step [stepControl]="account" [editable]="isEditable">
+                <div id="account"
+                     ngModelGroup="account"
+                     #account="ngModelGroup">
+                  <ng-template matStepLabel class="lead">Account Information</ng-template>
+                  <div class="form-group">
+                    <mat-form-field>
+                      <mat-label>Email</mat-label>
+                      <input matInput
+                             placeholder=""
+                             ngModel type="email"
+                             name="email"
+                             #email="ngModel"
+                             email
+                             required>
+                      <mat-icon matSuffix>email</mat-icon>
+                      <mat-hint>Hint</mat-hint>
+                      <mat-error *ngIf="email.invalid">Invalid Email!</mat-error>
+                    </mat-form-field>
+                  </div>
+<!--                  <div class="form-group">-->
+<!--                    <mat-form-field>-->
+<!--                      <mat-label>Password</mat-label>-->
+<!--                      <input matInput-->
+<!--                             placeholder=""-->
+<!--                             ngModel type="password"-->
+<!--                             name="password"-->
+<!--                             #password="ngModel"-->
+<!--                             required>-->
+<!--                      <mat-icon matSuffix>security</mat-icon>-->
+<!--                      <mat-hint>Hint!</mat-hint>-->
+<!--                      <mat-error *ngIf="password.invalid">Invalid Password!</mat-error>-->
+<!--                    </mat-form-field>-->
+<!--                  </div>-->
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                  <button mat-button matStepperPrevious type="button">Back</button>
+                  <button mat-button type="button" (click)="onValidateEmail(stepper, email.value)">Next</button>
+                </div>
+              </mat-step>
+              <mat-step [stepControl]="user" [editable]="isEditable">
+                <div id="user"
+                     ngModelGroup="user"
+                     #user="ngModelGroup">
+                  <ng-template matStepLabel class="lead">Personal Information</ng-template>
+
+                  <div class="form-group">
+                    <mat-form-field>
+                      <mat-label>Family Name</mat-label>
+                      <input matInput
+                             placeholder=""
+                             ngModel type="text"
+                             name="familyName"
+                             #familyName="ngModel"
+                             required>
+                      <mat-icon matSuffix>wc</mat-icon>
+                      <mat-hint>Hint</mat-hint>
+                      <mat-error *ngIf="familyName.invalid">Family Name is required!</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <mat-form-field>
+                      <mat-label>First Name</mat-label>
+                      <input matInput
+                             placeholder=""
+                             ngModel type="text"
+                             name="firstName"
+                             #firstName="ngModel"
+                             required>
+                      <mat-icon matSuffix>person</mat-icon>
+                      <mat-hint>Hint</mat-hint>
+                      <mat-error *ngIf="firstName.invalid">First Name is required!</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <mat-form-field>
+                      <mat-label>Middle Name</mat-label>
+                      <input matInput
+                             placeholder=""
+                             ngModel type="text"
+                             name="middleName"
+                             #middleName="ngModel">
+                      <mat-icon matSuffix>person</mat-icon>
+                      <mat-hint>Hint</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <mat-form-field>
+                      <mat-label>Last Name</mat-label>
+                      <input matInput
+                             placeholder=""
+                             ngModel type="text"
+                             name="lastName"
+                             #lastName="ngModel">
+                      <mat-icon matSuffix>person</mat-icon>
+                      <mat-hint>Hint</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <mat-form-field>
+                      <mat-label>Suffix</mat-label>
+                      <input matInput
+                             placeholder=""
+                             ngModel type="text"
+                             name="suffix"
+                             #suffix="ngModel">
+                      <mat-icon matSuffix>star</mat-icon>
+                      <mat-hint>e.g. Jr.</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                  <button mat-button matStepperPrevious type="button">Back</button>
+                  <button mat-button matStepperNext type="button">Next</button>
+                </div>
+              </mat-step>
+              <mat-step [stepControl]="address" [editable]="isEditable">
+                <div id="address"
+                     ngModelGroup="address"
+                     #address="ngModelGroup">
+
+                  <ng-template matStepLabel class="lead">Address</ng-template>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field>
+                          <mat-label>Street Address</mat-label>
+                          <input matInput
+                                 placeholder=""
+                                 ngModel type="text"
+                                 name="streetAddress"
+                                 #streetAddress="ngModel">
+                          <mat-icon matSuffix>home</mat-icon>
+                          <mat-hint>Hint</mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col d-flex flex-row justify-content-end">
+                        <mat-slide-toggle color="accent" checked="true">Show</mat-slide-toggle>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field>
+                          <mat-label>City</mat-label>
+                          <input matInput
+                                 placeholder=""
+                                 ngModel type="text"
+                                 name="city"
+                                 #city="ngModel">
+                          <mat-icon matSuffix>location_city</mat-icon>
+                          <mat-hint>Hint</mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col d-flex flex-row justify-content-end">
+                        <mat-slide-toggle color="accent" checked="true">Show</mat-slide-toggle>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field>
+                          <mat-label>State</mat-label>
+                          <mat-select ngModel name="state" #state="ngModel">
+                            <mat-option *ngFor="let oState of selectListValues.states" [value]="oState.id">
+                              {{oState.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+<!--                        <mat-form-field>-->
+<!--                          <mat-label>State</mat-label>-->
+<!--                          <input matInput-->
+<!--                                 placeholder=""-->
+<!--                                 ngModel type="text"-->
+<!--                                 name="state"-->
+<!--                                 #state="ngModel">-->
+<!--                          <mat-icon matSuffix>blur_on</mat-icon>-->
+<!--                          <mat-hint>Hint</mat-hint>-->
+<!--                        </mat-form-field>-->
+                      </div>
+                      <div class="col d-flex flex-row justify-content-end">
+                        <mat-slide-toggle color="accent" checked="true">Show</mat-slide-toggle>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field>
+                          <mat-label>Zip</mat-label>
+                          <input matInput
+                                 placeholder=""
+                                 ngModel type="text"
+                                 name="zip"
+                                 #zip="ngModel">
+                          <mat-icon matSuffix>settings_ethernet</mat-icon>
+                          <mat-hint>Hint</mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col d-flex flex-row justify-content-end">
+                        <mat-slide-toggle color="accent" checked="true">Show</mat-slide-toggle>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field>
+                          <mat-label>Home/Primay Phone</mat-label>
+                          <input matInput
+                                 placeholder=""
+                                 ngModel type="text"
+                                 name="primaryPhone"
+                                 #primaryPhone="ngModel">
+                          <mat-icon matSuffix>phone</mat-icon>
+                          <mat-hint>Hint</mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col d-flex flex-row justify-content-end">
+                        <mat-slide-toggle color="accent" checked="true">Show</mat-slide-toggle>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field>
+                          <mat-label>Cell Phone</mat-label>
+                          <input matInput
+                                 placeholder=""
+                                 ngModel type="text"
+                                 name="cellPhone"
+                                 #cellPhone="ngModel">
+                          <mat-icon matSuffix>phone_android</mat-icon>
+                          <mat-hint>Hint</mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col d-flex flex-row justify-content-end">
+                        <mat-slide-toggle color="accent" checked="true">Show</mat-slide-toggle>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                  <button mat-button matStepperPrevious type="button">Back</button>
+                  <button mat-button matStepperNext type="button">Next</button>
+                </div>
+              </mat-step>
+              <mat-step [stepControl]="students" [editable]="isEditable">
+                <div id="students"
+                     class=""
+                     ngModelGroup="students"
+                     #students="ngModelGroup">
+
+                  <ng-template matStepLabel class="lead">Students</ng-template>
+                  <mat-card class="students-card my-2"
+                            *ngFor="let student of studentsFormGroup; let i = index">
+                    <mat-card-content class="justify-content-center">
+                      <div class="child--box">
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Student First Name {{student.id}}</mat-label>
+                            <input matInput
+                                   placeholder=""
+                                   ngModel
+                                   type="text"
+                                   name="studentFirstName_{{ i }}"
+                                   #studentFirstName="ngModel"
+                                   value="{{student.id}}"
+                                   required>
+                            <mat-icon matSuffix>person</mat-icon>
+                            <mat-hint>Hint</mat-hint>
+                            <mat-error *ngIf="firstName.invalid">First Name is required!
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Student Middle Name</mat-label>
+                            <input matInput
+                                   placeholder=""
+                                   ngModel type="text"
+                                   name="studentMiddleName_{{ i }}"
+                                   #studentMiddleName="ngModel">
+                            <mat-icon matSuffix>person</mat-icon>
+                            <mat-hint>Hint</mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Student Last Name</mat-label>
+                            <input matInput
+                                   placeholder=""
+                                   ngModel type="text"
+                                   name="studentLastName_{{ i }}"
+                                   #studentLastName="ngModel">
+                            <mat-icon matSuffix>person</mat-icon>
+                            <mat-hint>Hint</mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Suffix</mat-label>
+                            <input matInput
+                                   placeholder=""
+                                   ngModel type="text"
+                                   name="suffix_{{ i }}"
+                                   #suffix="ngModel">
+                            <mat-icon matSuffix>star</mat-icon>
+                            <mat-hint>e.g. Jr.</mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>School</mat-label>
+                            <mat-select ngModel name="school_{{ i }}" #school="ngModel">
+                              <mat-option *ngFor="let school of selectListValues.schools" [value]="school.id">
+                                {{school.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+<!--                          <mat-form-field>-->
+<!--                            <mat-label>School</mat-label>-->
+<!--                            <input matInput-->
+<!--                                   placeholder=""-->
+<!--                                   ngModel type="text"-->
+<!--                                   name="school_{{ i }}"-->
+<!--                                   #school="ngModel">-->
+<!--                            <mat-icon matSuffix>school</mat-icon>-->
+<!--                            <mat-hint>e.g. Jr.</mat-hint>-->
+<!--                          </mat-form-field>-->
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Grade/Class</mat-label>
+                            <mat-select ngModel name="grade_{{ i }}" #grade="ngModel">
+                              <mat-option *ngFor="let grade of selectListValues.grades" [value]="grade.id">
+                                {{grade.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+<!--                          <mat-form-field>-->
+<!--                            <mat-label>Grade</mat-label>-->
+<!--                            <input matInput-->
+<!--                                   placeholder=""-->
+<!--                                   ngModel type="text"-->
+<!--                                   name="grade_{{ i }}"-->
+<!--                                   #grade="ngModel">-->
+<!--                            <mat-icon matSuffix>grade</mat-icon>-->
+<!--                            <mat-hint>e.g. Jr.</mat-hint>-->
+<!--                          </mat-form-field>-->
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Living with parent?</mat-label>
+                            <input matInput
+                                   placeholder=""
+                                   ngModel type="text"
+                                   name="lwp_{{ i }}"
+                                   #lwp="ngModel">
+                            <mat-icon matSuffix>nature_people</mat-icon>
+                            <mat-hint>e.g. Jr.</mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Home Room</mat-label>
+                            <input matInput
+                                   placeholder=""
+                                   ngModel type="text"
+                                   name="homeRoom_{{ i }}"
+                                   #homeRoom="ngModel">
+                            <mat-icon matSuffix>hotel</mat-icon>
+                            <mat-hint>e.g. Jr.</mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field>
+                            <mat-label>Sports/Activities</mat-label>
+                            <input matInput
+                                   placeholder=""
+                                   ngModel type="text"
+                                   name="sports_{{ i }}"
+                                   #sports="ngModel">
+                            <mat-icon matSuffix>directions_run</mat-icon>
+                            <mat-hint>e.g. Jr.</mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div *ngIf="student.id > 1">
+                          <button mat-icon-button type="button"
+                                  (click)="onRemoveChild($event, i)">
+                            <mat-icon color="warn">delete</mat-icon>
+                            <mat-hint>Remove this student</mat-hint>
+                          </button>
+                        </div>
+
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                  <div class="d-flex justify-content-end">
+                    <button mat-fab color="accent" type="button" (click)="onAddStudent()">
+                      <mat-icon matSuffix>person_add</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                  <button mat-button matStepperPrevious type="button">Back</button>
+                  <button mat-button (click)="onGotoPayment(stepper)" type="button">Next</button>
+                </div>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel class="lead">Payment</ng-template>
+
+
+
+                <mat-card class="payment-options-card">
+                  <mat-card-header>
+                    <mat-card-title>Schools & Member Fees</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <table class="table table-borderless text-left">
+                      <thead class="bg-secondary text-white">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">School</th>
+                        <th scope="col">Member Fee</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let item of paymentDetail.items; let i = index">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>{{ item.school }}</td>
+                        <td class="text-right">{{ item.member_fee|currency }}</td>
+                      </tr>
+                      <tr class="text-right">
+                        <td></td>
+                        <th scope="row">Total</th>
+                        <th>{{ paymentDetail.total|currency }}</th>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </mat-card-content>
+                </mat-card>
+
+                <mat-card class="payment-options-card">
+                  <mat-card-header>
+                    <mat-card-title>Payment Options</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <mat-list>
+                      <div mat-subheader>Credit Card</div>
+                      <mat-list-item>
+                        <mat-icon mat-list-icon>credit_card</mat-icon>
+                        <div mat-line>
+                          <button mat-raised-button color="primary" (click)="openStripePaymentDialog()" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with card</button>
+                        </div>
+                      </mat-list-item>
+                      <mat-divider></mat-divider>
+                      <div mat-subheader>Check</div>
+                      <mat-list-item>
+                        <mat-icon mat-list-icon>attach_money</mat-icon>
+                        <div mat-line>
+                          <button mat-raised-button color="primary" (click)="openCheck()" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with Check</button>
+                        </div>
+                      </mat-list-item>
+                    </mat-list>
+                  </mat-card-content>
+                </mat-card>
+
+
+
+              </mat-step>
+            </mat-vertical-stepper>
+          </mat-card-content>
+<!--          <hr>-->
+<!--          <mat-card-actions class="my-5">-->
+<!--            <button mat-raised-button color="primary" [disabled]="disableRegisterButton">Register</button>-->
+<!--          </mat-card-actions>-->
+        </mat-card>
+      </form>
+
+    </div>
+  </div>
+</div>

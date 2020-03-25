@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Credit Card Payment</h1>
+<div mat-dialog-content>
+  <form #checkout="ngForm" (ngSubmit)="onSubmitStripeForm(checkout)" class="checkout">
+    <div class="form-row">
+      <label for="card-info">Card Info</label>
+      <div id="card-info" #cardInfo></div>
+
+      <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <button type="submit">Pay ${{ data.totalAmount}}</button>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+<!--  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>-->
+</div>

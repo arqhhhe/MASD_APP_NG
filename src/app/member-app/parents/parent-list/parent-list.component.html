@@ -1,0 +1,12 @@
+<mat-action-list>
+    <mat-card *ngFor="let parent of parents; let i = index">
+        <mat-card-content>
+            <button mat-list-item class="text-left" (click)="loadDetail(parent.family_id)">
+                <div class="row w-115">
+                    <div class="col-4">{{parent.family}}</div>
+                    <div class="col-8 text-right">{{parent.parents}}</div>
+                </div>
+            </button>
+        </mat-card-content>
+    </mat-card>
+</mat-action-list>
