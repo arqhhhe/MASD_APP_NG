@@ -1,6 +1,6 @@
 <div class="container justify-content-center align-items-center login-bg">
 
-  <div class="row">
+  <div class="row" *ngIf="!isRegistrationSuccessful && !isMemberExist">
     <div class="col register-form--container d-flex flex-row justify-content-center">
       <form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm">
         <input type="hidden" [ngModel]="isProfileExist" name="isProfileExist">
@@ -145,8 +145,11 @@
                   <button mat-button type="button" (click)="onValidateEmail(stepper, email.value)">Next</button>
                 </div>
               </mat-step>
+
+
               <mat-step [stepControl]="user" [editable]="isEditable">
                 <div id="user"
+                     class="hideable"
                      ngModelGroup="user"
                      #user="ngModelGroup">
                   <ng-template matStepLabel class="lead">Personal Information</ng-template>
@@ -198,7 +201,8 @@
                              placeholder=""
                              ngModel type="text"
                              name="lastName"
-                             #lastName="ngModel">
+                             #lastName="ngModel"
+                             required>
                       <mat-icon matSuffix>person</mat-icon>
                       <mat-hint>Hint</mat-hint>
                     </mat-form-field>
@@ -210,7 +214,8 @@
                              placeholder=""
                              ngModel type="text"
                              name="suffix"
-                             #suffix="ngModel">
+                             #suffix="ngModel"
+                             required>
                       <mat-icon matSuffix>star</mat-icon>
                       <mat-hint>e.g. Jr.</mat-hint>
                     </mat-form-field>
@@ -221,8 +226,10 @@
                   <button mat-button matStepperNext type="button">Next</button>
                 </div>
               </mat-step>
+
               <mat-step [stepControl]="address" [editable]="isEditable">
                 <div id="address"
+                     class="hideable"
                      ngModelGroup="address"
                      #address="ngModelGroup">
 
@@ -237,7 +244,8 @@
                                  placeholder=""
                                  ngModel type="text"
                                  name="streetAddress"
-                                 #streetAddress="ngModel">
+                                 #streetAddress="ngModel"
+                                 required>
                           <mat-icon matSuffix>home</mat-icon>
                           <mat-hint>Hint</mat-hint>
                         </mat-form-field>
@@ -256,7 +264,8 @@
                                  placeholder=""
                                  ngModel type="text"
                                  name="city"
-                                 #city="ngModel">
+                                 #city="ngModel"
+                                 required>
                           <mat-icon matSuffix>location_city</mat-icon>
                           <mat-hint>Hint</mat-hint>
                         </mat-form-field>
@@ -271,22 +280,12 @@
                       <div class="col">
                         <mat-form-field>
                           <mat-label>State</mat-label>
-                          <mat-select ngModel name="state" #state="ngModel">
+                          <mat-select ngModel name="state" #state="ngModel" required>
                             <mat-option *ngFor="let oState of selectListValues.states" [value]="oState.id">
                               {{oState.name}}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
-<!--                        <mat-form-field>-->
-<!--                          <mat-label>State</mat-label>-->
-<!--                          <input matInput-->
-<!--                                 placeholder=""-->
-<!--                                 ngModel type="text"-->
-<!--                                 name="state"-->
-<!--                                 #state="ngModel">-->
-<!--                          <mat-icon matSuffix>blur_on</mat-icon>-->
-<!--                          <mat-hint>Hint</mat-hint>-->
-<!--                        </mat-form-field>-->
                       </div>
                       <div class="col d-flex flex-row justify-content-end">
                         <mat-slide-toggle color="accent" checked="true">Show</mat-slide-toggle>
@@ -302,7 +301,8 @@
                                  placeholder=""
                                  ngModel type="text"
                                  name="zip"
-                                 #zip="ngModel">
+                                 #zip="ngModel"
+                                 required>
                           <mat-icon matSuffix>settings_ethernet</mat-icon>
                           <mat-hint>Hint</mat-hint>
                         </mat-form-field>
@@ -321,7 +321,8 @@
                                  placeholder=""
                                  ngModel type="text"
                                  name="primaryPhone"
-                                 #primaryPhone="ngModel">
+                                 #primaryPhone="ngModel"
+                                 required>
                           <mat-icon matSuffix>phone</mat-icon>
                           <mat-hint>Hint</mat-hint>
                         </mat-form-field>
@@ -357,9 +358,10 @@
                   <button mat-button matStepperNext type="button">Next</button>
                 </div>
               </mat-step>
+
               <mat-step [stepControl]="students" [editable]="isEditable">
                 <div id="students"
-                     class=""
+                     class="hideable"
                      ngModelGroup="students"
                      #students="ngModelGroup">
 
@@ -404,7 +406,8 @@
                                    placeholder=""
                                    ngModel type="text"
                                    name="studentLastName_{{ i }}"
-                                   #studentLastName="ngModel">
+                                   #studentLastName="ngModel"
+                                   required>
                             <mat-icon matSuffix>person</mat-icon>
                             <mat-hint>Hint</mat-hint>
                           </mat-form-field>
@@ -416,7 +419,8 @@
                                    placeholder=""
                                    ngModel type="text"
                                    name="suffix_{{ i }}"
-                                   #suffix="ngModel">
+                                   #suffix="ngModel"
+                                   required>
                             <mat-icon matSuffix>star</mat-icon>
                             <mat-hint>e.g. Jr.</mat-hint>
                           </mat-form-field>
@@ -424,42 +428,22 @@
                         <div class="form-group">
                           <mat-form-field>
                             <mat-label>School</mat-label>
-                            <mat-select ngModel name="school_{{ i }}" #school="ngModel">
+                            <mat-select ngModel name="school_{{ i }}" #school="ngModel" required>
                               <mat-option *ngFor="let school of selectListValues.schools" [value]="school.id">
                                 {{school.name}}
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
-<!--                          <mat-form-field>-->
-<!--                            <mat-label>School</mat-label>-->
-<!--                            <input matInput-->
-<!--                                   placeholder=""-->
-<!--                                   ngModel type="text"-->
-<!--                                   name="school_{{ i }}"-->
-<!--                                   #school="ngModel">-->
-<!--                            <mat-icon matSuffix>school</mat-icon>-->
-<!--                            <mat-hint>e.g. Jr.</mat-hint>-->
-<!--                          </mat-form-field>-->
                         </div>
                         <div class="form-group">
                           <mat-form-field>
                             <mat-label>Grade/Class</mat-label>
-                            <mat-select ngModel name="grade_{{ i }}" #grade="ngModel">
+                            <mat-select ngModel name="grade_{{ i }}" #grade="ngModel" required>
                               <mat-option *ngFor="let grade of selectListValues.grades" [value]="grade.id">
                                 {{grade.name}}
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
-<!--                          <mat-form-field>-->
-<!--                            <mat-label>Grade</mat-label>-->
-<!--                            <input matInput-->
-<!--                                   placeholder=""-->
-<!--                                   ngModel type="text"-->
-<!--                                   name="grade_{{ i }}"-->
-<!--                                   #grade="ngModel">-->
-<!--                            <mat-icon matSuffix>grade</mat-icon>-->
-<!--                            <mat-hint>e.g. Jr.</mat-hint>-->
-<!--                          </mat-form-field>-->
                         </div>
                         <div class="form-group">
                           <mat-form-field>
@@ -519,6 +503,8 @@
                   <button mat-button (click)="onGotoPayment(stepper)" type="button">Next</button>
                 </div>
               </mat-step>
+
+
               <mat-step>
                 <ng-template matStepLabel class="lead">Payment</ng-template>
 
@@ -590,6 +576,40 @@
         </mat-card>
       </form>
 
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isRegistrationSuccessful">
+    <div class="col register-form--container d-flex flex-row justify-content-center">
+        <mat-card class="register-card">
+          <mat-card-header class="justify-content-center">
+            <div mat-card-avatar class="mobile-arq-icon"></div>
+            <mat-card-title class="text-left">Register</mat-card-title>
+            <mat-card-subtitle>Fill your member profile</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="justify-content-center">
+            <p class="lead">Congrtulations!</p>
+            <p>Your registration is successful. Please check your email for further instruction.</p>
+            <p>Thanks</p>
+          </mat-card-content>
+        </mat-card>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isMemberExist">
+    <div class="col register-form--container d-flex flex-row justify-content-center">
+      <mat-card class="register-card">
+        <mat-card-header class="justify-content-center">
+          <div mat-card-avatar class="mobile-arq-icon"></div>
+          <mat-card-title class="text-left">Register</mat-card-title>
+          <mat-card-subtitle>Fill your member profile</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="justify-content-center">
+          <p class="lead">Attention Please!</p>
+          <p>You are already registered. If you are facing problem in login please contact to Admin</p>
+          <p>Thanks</p>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>

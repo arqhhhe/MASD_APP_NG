@@ -33,7 +33,7 @@ export class PaymentDialogStripeComponent implements  OnDestroy, AfterViewInit{
 
 
   ngAfterViewInit() {
-    this.stripe = (<any>window).Stripe('pk_test_AwZK6CqSeQi3OzaseGFlqVMk');
+    this.stripe = (<any>window).Stripe('pk_test_iQ2nwFIkJ7hVVKtvtr5EPUNa002MnJ83gZ');
     this.elements = this.stripe.elements();
     this.card = this.elements.create('card');
     this.card.mount(this.cardInfo.nativeElement);

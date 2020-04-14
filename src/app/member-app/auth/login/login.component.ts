@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {MockDataService} from '../../../shared/mock-data.service';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../../../shared/auth.service';
+import {ContextService} from '../../../shared/context.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private mockData: MockDataService,
     private httpClient: HttpClient,
-    private auth: AuthService
+    private auth: AuthService,
+    private context: ContextService
   ) {
   }
 
@@ -41,12 +43,20 @@ export class LoginComponent implements OnInit {
 
     console.log(environment.apiEndPoint);
 
-    this.httpClient.post(environment.apiEndPoint + '/login', data).subscribe(
+    this.httpClient.post<any>(environment.apiEndPoint + '/login', data).subscribe(
       (response) => {
-        console.log('Success!');
-        console.log(response);
-        localStorage.setItem('auth', JSON.stringify(response));
-        this.router.navigate(['/']);
+        console.log('Login response', response);
+        this.context.auth = response.data.auth;
+        this.context.member = response.data.member;
+        this.context.guardian = response.data.guardian;
+        this.context.family = response.data.family;
+        this.context.students = response.data.students;
+        this.context.schools = response.data.schools;
+        this.context.domain = response.data.domain;
+        localStorage.setItem('auth', JSON.stringify(response.data.auth));
+        sessionStorage.setItem('context', JSON.stringify(response.data));
+        console.log('this.context service', this.context);
+        this.router.navigate(['/profile']);
       },
       error => {
         this.error = true;

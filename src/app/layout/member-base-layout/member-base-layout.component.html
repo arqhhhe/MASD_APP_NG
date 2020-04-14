@@ -38,17 +38,9 @@
                                 <mat-icon>account_balance</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item>
+                                <button mat-menu-item *ngFor="let school of schools">
                                     <mat-icon>blank</mat-icon>
-                                    <span>Elementtory School 1</span>
-                                </button>
-                                <button mat-menu-item disabled>
-                                    <mat-icon>done</mat-icon>
-                                    <span>Elementtory School 2</span>
-                                </button>
-                                <button mat-menu-item>
-                                    <mat-icon>blank</mat-icon>
-                                    <span>Elementtory School 3</span>
+                                    <span>{{ school.name }}</span>
                                 </button>
                             </mat-menu>
                         </div>

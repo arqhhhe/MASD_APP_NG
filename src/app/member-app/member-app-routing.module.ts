@@ -7,6 +7,7 @@ import {ParentsComponent} from './parents/parents.component';
 import {ParentDetailComponent} from './parents/parent-detail/parent-detail.component';
 import {StudentsComponent} from './students/students.component';
 import {StudentDetailComponent} from './students/student-detail/student-detail.component';
+import {ProfileComponent} from './parents/profile/profile.component';
 
 const memberRoutes: Routes = [
   // Member routes goes here
@@ -25,6 +26,7 @@ const memberRoutes: Routes = [
           {path: ':id', component: StudentDetailComponent}
         ]
       },
+      {path: 'profile', component: ProfileComponent}
     ]
   },
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ContextService} from '../../shared/context.service';
 
 @Component({
   selector: 'masd-member-base-layout',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberBaseLayoutComponent implements OnInit {
 
-  constructor() { }
+  schools;
+
+  constructor(private context: ContextService) { }
 
   ngOnInit() {
+    this.schools = this.context.schools;
   }
 
 }

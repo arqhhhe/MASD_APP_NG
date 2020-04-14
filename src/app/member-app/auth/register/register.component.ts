@@ -14,7 +14,7 @@ import * as _ from 'lodash';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, AfterViewInit {
 
   public studentsFormGroup: { id: number }[] = [{id: -1}];
   public disableRegisterButton: Boolean = true;
@@ -27,6 +27,8 @@ export class RegisterComponent implements OnInit {
   private domain: any;
   public  selectListValues: {states: {id: any, name: any}[], schools: {id: any, name: any, member_fee: any}[], grades: {id: any, name: any}[]} = { states: [], schools: [], grades: []};
   public isProfileExist = false;
+  public isRegistrationSuccessful = false;
+  public isMemberExist = false;
 
 
   @ViewChild('registrationForm', {static: false}) registrationForm: NgForm;
@@ -46,7 +48,23 @@ export class RegisterComponent implements OnInit {
   ) {
   }
 
+  hideable(action) {
+    switch (action) {
+      case  'show':
+        $('.hideable').closest('.mat-step').show();
+        break;
+      case 'hide':
+        $('.hideable').closest('.mat-step').hide();
+        break;
+    }
+  }
+
   ngOnInit() {
+    // this.hideable('hide');
+  }
+
+  ngAfterViewInit(): void {
+    this.hideable('hide');
   }
 
 
@@ -155,7 +173,7 @@ export class RegisterComponent implements OnInit {
     this.data.students.forEach(student => {
       // const {domain_id, domain, school_id, school, member_fee} = student;
       const pickedPaymentData = _.pick(student, ['domain_id', 'domain', 'school_id', 'school', 'member_fee']);
-      this.paymentDetail.items.push(pickedPaymentData);
+      this.pushUniqueItem(pickedPaymentData);
       this.paymentDetail.total += parseFloat(pickedPaymentData.member_fee || '0.00');
       console.log('pickedPaymentData', pickedPaymentData);
 
@@ -171,11 +189,19 @@ export class RegisterComponent implements OnInit {
     console.log('address', this.address);
     console.log('students', this.students);
 
-    this.httpClient.get<{ status: any, data: any }>(`${environment.apiEndPoint}/email/${email}`).subscribe(
+    this.httpClient.get<{ status: any, data: any, meta: any }>(`${environment.apiEndPoint}/email/${email}`).subscribe(
       response => {
-        console.log('response', response);
+        console.log('onValidateEmail: response', response);
         // @ts-ignore
         if (response.status) {
+          if (response.meta.member_exists) {
+            this.isMemberExist = true;
+            return;
+          }
+          if (!response.meta.payment_required) {
+            this.isRegistrationSuccessful = true;
+            return;
+          }
           this.isProfileExist = true;
           this.isEditable = false;
           this.data = response.data;
@@ -197,6 +223,7 @@ export class RegisterComponent implements OnInit {
           }, 100);
 
         } else {
+          this.hideable('show');
           stepper.next();
         }
       },
@@ -229,13 +256,12 @@ export class RegisterComponent implements OnInit {
 
     const studdentsValue = {};
     data.students.forEach(function (student, i) {
-      // i = i - 1;
-      studdentsValue['studentFirstName_' + i] = student.first_name || '';
-      studdentsValue['studentMiddleName_' + i] = student.middle_namec || '';
-      studdentsValue['studentLastName_' + i] = student.last_name || '';
-      studdentsValue['suffix_' + i] = student.salutationv || '';
-      studdentsValue['school_' + i] = student.school_id || '';
-      studdentsValue['grade_' + i] = student.grade_id || '';
+      studdentsValue['studentFirstName_' + i] = student.first_name || ' ';
+      studdentsValue['studentMiddleName_' + i] = student.middle_namec || ' ';
+      studdentsValue['studentLastName_' + i] = student.last_name || ' ';
+      studdentsValue['suffix_' + i] = student.salutation || ' ';
+      studdentsValue['school_' + i] = student.school_id || ' ';
+      studdentsValue['grade_' + i] = student.grade_id || ' ';
       studdentsValue['lwp_' + i] = '';
       studdentsValue['homeRoom_' + i] = '';
       studdentsValue['sports_' + i] = '';
@@ -243,6 +269,17 @@ export class RegisterComponent implements OnInit {
     console.log('studdentsValue', studdentsValue);
     me.students.control.setValue(studdentsValue);
 
+  }
+
+  pushUniqueItem(item) {
+    console.log('pushUniqueItem: item', item);
+    const index = this.paymentDetail.items.findIndex(x => x.school_id == item.school_id);
+    console.log('pushUniqueItem: index', index);
+    if (index === -1) {
+      this.paymentDetail.items.push(item);
+    } else {
+      console.log('object already exists', item);
+    }
   }
 
   setPaymentDetails(registrationForm: NgForm) {
@@ -257,11 +294,15 @@ export class RegisterComponent implements OnInit {
     this.selectListValues.schools.forEach(school => {
       schoolIds.forEach(schoolId => {
         if (school.id == schoolId) {
-          this.paymentDetail.items.push({
+
+          this.pushUniqueItem({
+            domain_id: this.domain.id,
+            domain: this.domain.name,
             school_id: school.id,
             school: school.name,
             member_fee: school.member_fee,
           });
+
           total += parseFloat(school.member_fee);
         }
       });
@@ -269,18 +310,19 @@ export class RegisterComponent implements OnInit {
     this.paymentDetail.total = total.toFixed(2);
   }
 
-  onGotoPayment(stepper: MatStepper){
+  onGotoPayment(stepper: MatStepper) {
     this.setPaymentDetails(this.registrationForm);
     stepper.next();
   }
 
   onSubmit(registrationForm: NgForm, paymentMethod) {
 
-    let payment = this.paymentDetail;
+    const payment = this.paymentDetail;
     payment.paymentMethod = paymentMethod;
 
     registrationForm.value.payment = payment;
     console.log('registrationForm.value', registrationForm.value);
+
     const data = new FormData();
     data.append('registrationForm', registrationForm.value);
 
@@ -288,10 +330,10 @@ export class RegisterComponent implements OnInit {
 
     this.httpClient.post<any>(environment.apiEndPoint + '/register', {registrationForm: registrationForm.value}).subscribe(
       (response) => {
-        console.log('Success!');
-        console.log(response);
-        // localStorage.setItem('auth', JSON.stringify(response));
-        // this.router.navigate(['/']);
+        console.log('onSubmit: response', response);
+        if (response.status) {
+          this.isRegistrationSuccessful = true;
+        }
       },
       error => {
         console.log('Error!', error);
@@ -318,9 +360,9 @@ export class RegisterComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
-      if ('object' in result && result.object === 'token'){
+      if ('object' in result && result.object === 'token') {
         this.onSubmit(this.registrationForm, {method: 'stripe', meta: result});
-      }else{
+      } else {
         this.snackBar.open(result.message, 'Close', {
           duration: this.snackBarNotificationDuration,
           verticalPosition: 'bottom'

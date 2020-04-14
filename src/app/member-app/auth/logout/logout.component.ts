@@ -12,7 +12,7 @@ export class LogoutComponent implements OnInit {
   constructor(private router: Router, private mockData: MockDataService) { }
 
   ngOnInit() {
-    this.mockData.isLogedIn = false;
+    localStorage.removeItem('auth');
     this.router.navigate(['/login']);
   }
 

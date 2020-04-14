@@ -11,6 +11,8 @@ import {StudentsComponent} from './students/students.component';
 import {StudentListComponent} from './students/student-list/student-list.component';
 import {StudentDetailComponent} from './students/student-detail/student-detail.component';
 import {CustomMaterialModule} from '../shared/custom-material/custom-material.module';
+import { ProfileComponent } from './parents/profile/profile.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -21,14 +23,16 @@ import {CustomMaterialModule} from '../shared/custom-material/custom-material.mo
         ParentDetailComponent,
         StudentsComponent,
         StudentListComponent,
-        StudentDetailComponent
+        StudentDetailComponent,
+        ProfileComponent
     ],
-    imports: [
-        CommonModule,
-        MemberAppRoutingModule,
-        AuthModule,
-        CustomMaterialModule
-    ]
+  imports: [
+    CommonModule,
+    MemberAppRoutingModule,
+    AuthModule,
+    CustomMaterialModule,
+    ReactiveFormsModule
+  ]
 })
 export class MemberAppModule {
 }
