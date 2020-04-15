@@ -16,6 +16,7 @@ const memberRoutes: Routes = [
     component: MemberBaseLayoutComponent,
     children: [
       {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'switchSchool/:schoolId/referer/:url', component: HomeComponent},
       {
         path: 'parents', component: ParentsComponent, children: [
           {path: ':id', component: ParentDetailComponent}

@@ -12,10 +12,10 @@ export class ContextService {
   private _students: any;
   private _schools: any;
   private _domain: any;
-  private _context: any;
+  private _meta: any;
 
   get auth(): any {
-    return this._auth || JSON.parse(sessionStorage.getItem('context')).auth;
+    return this._auth || this.getFromStorageContext( 'auth');
   }
 
   set auth(value: any) {
@@ -23,7 +23,7 @@ export class ContextService {
   }
 
   get member(): any {
-    return this._member || JSON.parse(sessionStorage.getItem('context')).member;
+    return this._member || this.getFromStorageContext( 'member');
   }
 
   set member(value: any) {
@@ -31,7 +31,7 @@ export class ContextService {
   }
 
   get guardian(): any {
-    return this._guardian || JSON.parse(sessionStorage.getItem('context')).guardian;
+    return this._guardian || this.getFromStorageContext( 'guardian');
   }
 
   set guardian(value: any) {
@@ -39,7 +39,7 @@ export class ContextService {
   }
 
   get family(): any {
-    return this._family || JSON.parse(sessionStorage.getItem('context')).family;
+    return this._family || this.getFromStorageContext( 'family');
   }
 
   set family(value: any) {
@@ -47,7 +47,7 @@ export class ContextService {
   }
 
   get students(): any {
-    return this._students || JSON.parse(sessionStorage.getItem('context')).students;
+    return this._students || this.getFromStorageContext( 'students');
   }
 
   set students(value: any) {
@@ -55,7 +55,7 @@ export class ContextService {
   }
 
   get schools(): any {
-    return this._schools || JSON.parse(sessionStorage.getItem('context')).schools;
+    return this._schools || this.getFromStorageContext( 'schools');
   }
 
   set schools(value: any) {
@@ -63,15 +63,39 @@ export class ContextService {
   }
 
   get domain(): any {
-    return this._domain || JSON.parse(sessionStorage.getItem('context')).domain;
+    return this._domain || this.getFromStorageContext( 'domain');
   }
 
   set domain(value: any) {
     this._domain = value;
   }
 
+  get meta(): any {
+    return this._meta || this.getFromStorageContext( 'meta');
+  }
+
+  set meta(value: any) {
+    this._meta = value;
+  }
+
   constructor() {
   }
 
+  getFromStorageContext( property: string) {
+    if ('context' in sessionStorage) {
+      return JSON.parse(sessionStorage.getItem('context'))[`_${property}`];
+    }
+    return false;
+  }
+
+  isContextExist(){
+    return ('context' in sessionStorage);
+  }
+
+  setCurrentSchool(schoolId) {
+    let tmpMeta = this.meta;
+    tmpMeta.current.school.id = schoolId;
+    this.meta = tmpMeta;
+  }
 
 }

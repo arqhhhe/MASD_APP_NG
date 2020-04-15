@@ -47,7 +47,7 @@ export class ParentDetailComponent implements OnInit {
       })
     };
 
-    this.httpClient.get(environment.apiEndPoint + '/parents/' + familyId, httpOptions).subscribe(
+    this.httpClient.get(environment.apiEndPoint + `/parentDetail/${familyId}`, httpOptions).subscribe(
       (response) => {
         // console.log('Success!');
         // console.log(response);

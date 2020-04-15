@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-8 d-flex flex-row justify-content-center">
                         <mat-form-field appearance="standard">
-                            <mat-label>Search</mat-label>
+                            <mat-label>Search...</mat-label>
                             <input matInput placeholder="Search...">
                             <mat-icon matSuffix>search</mat-icon>
                         </mat-form-field>
@@ -38,10 +38,11 @@
                                 <mat-icon>account_balance</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item *ngFor="let school of schools">
-                                    <mat-icon>blank</mat-icon>
+                                <a mat-menu-item *ngFor="let school of schools" [routerLink]="['/switchSchool', school.id, 'referer', currentUrl]">
+                                  <mat-icon *ngIf="isCurrentSchool(school.id)">check</mat-icon>
+                                  <mat-icon *ngIf="!isCurrentSchool(school.id)">blank</mat-icon>
                                     <span>{{ school.name }}</span>
-                                </button>
+                                </a>
                             </mat-menu>
                         </div>
 

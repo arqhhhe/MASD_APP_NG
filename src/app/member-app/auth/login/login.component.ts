@@ -2,7 +2,7 @@ import { environment } from '../../../../environments/environment';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-
+import * as _ from 'lodash';
 
 import {MockDataService} from '../../../shared/mock-data.service';
 import {NgForm} from '@angular/forms';
@@ -53,8 +53,15 @@ export class LoginComponent implements OnInit {
         this.context.students = response.data.students;
         this.context.schools = response.data.schools;
         this.context.domain = response.data.domain;
+        this.context.meta = {
+          current: {
+            school: response.data.schools[0]
+          },
+          schoolIds: _.map(this.context.schools, 'id').toString()
+        };
         localStorage.setItem('auth', JSON.stringify(response.data.auth));
-        sessionStorage.setItem('context', JSON.stringify(response.data));
+        // sessionStorage.setItem('context', JSON.stringify(response.data));
+        sessionStorage.setItem('context', JSON.stringify(this.context));
         console.log('this.context service', this.context);
         this.router.navigate(['/profile']);
       },
