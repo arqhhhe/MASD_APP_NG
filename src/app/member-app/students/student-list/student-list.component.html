@@ -4,10 +4,10 @@
 
 
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let stdClass of students; let i = index">
+  <mat-expansion-panel *ngFor="let grade of students; let i = index">
     <mat-expansion-panel-header>
       <mat-panel-title class="flex-column justify-content-center">
-        {{stdClass.className}}
+        {{grade.name}}
       </mat-panel-title>
       <mat-panel-description class="flex-row justify-content-end">
         <button mat-mini-fab color="primary">
@@ -16,12 +16,12 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-card *ngFor="let student of stdClass.students; let j = index">
+    <mat-card *ngFor="let student of grade.students; let j = index">
       <mat-card-content>
-        <button mat-button class="text-left w-100" (click)="loadDetail(i,j)">
+        <button mat-button class="text-left w-100" (click)="loadDetail(student.id)">
           <div class="row">
-            <div class="col-3">{{student.lastName}}</div>
-            <div class="col-9">{{student.firstName}}</div>
+            <div class="col-3">{{student.last_name}}</div>
+            <div class="col-9">{{student.first_name}}</div>
 
           </div>
         </button>

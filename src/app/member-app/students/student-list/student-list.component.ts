@@ -5,6 +5,7 @@ import {MockDataService} from '../../../shared/mock-data.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../shared/auth.service';
+import {ContextService} from '../../../shared/context.service';
 
 @Component({
   selector: 'masd-student-list',
@@ -19,7 +20,8 @@ export class StudentListComponent implements OnInit {
     private mockData: MockDataService,
     private router: Router,
     private  auth: AuthService,
-    private  httpClient: HttpClient
+    private  httpClient: HttpClient,
+    private context: ContextService
   ) {
   }
 
@@ -35,10 +37,10 @@ export class StudentListComponent implements OnInit {
       })
     };
 
-    this.httpClient.get(environment.apiEndPoint + '/parents', httpOptions).subscribe(
+    this.httpClient.get(`${environment.apiEndPoint}/students/${this.context.meta.current.school.id}`, httpOptions).subscribe(
       (response) => {
-        // console.log('Success!');
-        // console.log(response);
+        console.log('Success!');
+        console.log(response);
         this.students = response;
       },
       error => {

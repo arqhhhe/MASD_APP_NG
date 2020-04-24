@@ -17,7 +17,6 @@ export class ParentDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private mockData: MockDataService,
     private httpClient: HttpClient,
     private auth: AuthService
   ) {
@@ -57,8 +56,7 @@ export class ParentDetailComponent implements OnInit {
         console.log('Error!', error);
       },
       () => {
-        // console.log('Complete!');
-        // console.log('HTTP request completed.');
+        console.log('HTTP request completed.');
       }
     );
 
