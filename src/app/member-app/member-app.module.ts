@@ -13,6 +13,9 @@ import {StudentDetailComponent} from './students/student-detail/student-detail.c
 import {CustomMaterialModule} from '../shared/custom-material/custom-material.module';
 import { ProfileComponent } from './parents/profile/profile.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { FacultiesComponent } from './faculties/faculties.component';
+import { FacultyListComponent } from './faculties/faculty-list/faculty-list.component';
+import { FacultyDetailComponent } from './faculties/faculty-detail/faculty-detail.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import {ReactiveFormsModule} from '@angular/forms';
         StudentsComponent,
         StudentListComponent,
         StudentDetailComponent,
-        ProfileComponent
+        ProfileComponent,
+        FacultiesComponent,
+        FacultyListComponent,
+        FacultyDetailComponent
     ],
   imports: [
     CommonModule,

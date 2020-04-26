@@ -1,0 +1,12 @@
+<mat-action-list>
+  <mat-card *ngFor="let designation of faculties">
+    <mat-card-content>
+      <div>{{ designation.designation.name}}</div>
+      <button mat-list-item class="text-left" *ngFor="let staff of designation.staffs" (click)="loadDetail(staff.id)">
+        <div class="row w-115">
+          <div class="col-4">{{staff.first_name}} {{staff.last_name}}</div>
+        </div>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</mat-action-list>

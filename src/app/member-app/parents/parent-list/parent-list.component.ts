@@ -19,7 +19,6 @@ export class ParentListComponent implements OnInit {
   parents;
 
   constructor(
-    private mockData: MockDataService,
     private router: Router,
     private httpClient: HttpClient,
     private auth: AuthService,

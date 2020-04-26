@@ -8,6 +8,8 @@ import {ParentDetailComponent} from './parents/parent-detail/parent-detail.compo
 import {StudentsComponent} from './students/students.component';
 import {StudentDetailComponent} from './students/student-detail/student-detail.component';
 import {ProfileComponent} from './parents/profile/profile.component';
+import {FacultiesComponent} from './faculties/faculties.component';
+import {FacultyDetailComponent} from './faculties/faculty-detail/faculty-detail.component';
 
 const memberRoutes: Routes = [
   // Member routes goes here
@@ -25,6 +27,11 @@ const memberRoutes: Routes = [
       {
         path: 'students', component: StudentsComponent, children: [
           {path: ':id', component: StudentDetailComponent}
+        ]
+      },
+      {
+        path: 'faculties', component: FacultiesComponent, children: [
+          {path: ':id', component: FacultyDetailComponent}
         ]
       },
       {path: 'profile', component: ProfileComponent}
