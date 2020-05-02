@@ -16,6 +16,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { FacultiesComponent } from './faculties/faculties.component';
 import { FacultyListComponent } from './faculties/faculty-list/faculty-list.component';
 import { FacultyDetailComponent } from './faculties/faculty-detail/faculty-detail.component';
+import { CommitteesComponent } from './committees/committees.component';
+import { CommitteeListComponent } from './committees/committee-list/committee-list.component';
+import { CommitteeDetailComponent } from './committees/committee-detail/committee-detail.component';
+import { SponsorsComponent } from './sponsors/sponsors.component';
+import { SponsorListComponent } from './sponsors/sponsor-list/sponsor-list.component';
+import { SponsorDetailComponent } from './sponsors/sponsor-detail/sponsor-detail.component';
 
 
 @NgModule({
@@ -30,7 +36,13 @@ import { FacultyDetailComponent } from './faculties/faculty-detail/faculty-detai
         ProfileComponent,
         FacultiesComponent,
         FacultyListComponent,
-        FacultyDetailComponent
+        FacultyDetailComponent,
+        CommitteesComponent,
+        CommitteeListComponent,
+        CommitteeDetailComponent,
+        SponsorsComponent,
+        SponsorListComponent,
+        SponsorDetailComponent
     ],
   imports: [
     CommonModule,

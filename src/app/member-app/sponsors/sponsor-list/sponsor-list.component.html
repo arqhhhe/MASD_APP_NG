@@ -1,0 +1,11 @@
+<mat-action-list>
+  <mat-card *ngFor="let sponsor of sponsors">
+    <mat-card-content>
+      <button mat-list-item class="text-left" (click)="loadDetail(sponsor.id)">
+        <div class="row">
+          <div class="col-4">{{sponsor.name}}</div>
+        </div>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</mat-action-list>

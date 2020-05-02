@@ -1,0 +1,12 @@
+<mat-action-list>
+  <mat-card *ngFor="let committee of committees">
+    <mat-card-content>
+      <button mat-list-item class="text-left" (click)="loadDetail(committee.id)">
+        <div class="row">
+          <div class="col-4">{{committee.name}}</div>
+        </div>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</mat-action-list>
+

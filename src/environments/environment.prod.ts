@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiEndPoint: 'http://inspiredfpv.com//api',
+  baseUrl: 'http://inspiredfpv.com',
+  apiEndPoint: 'http://inspiredfpv.com/api',
 };

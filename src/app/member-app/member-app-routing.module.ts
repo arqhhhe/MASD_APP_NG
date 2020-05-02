@@ -10,6 +10,10 @@ import {StudentDetailComponent} from './students/student-detail/student-detail.c
 import {ProfileComponent} from './parents/profile/profile.component';
 import {FacultiesComponent} from './faculties/faculties.component';
 import {FacultyDetailComponent} from './faculties/faculty-detail/faculty-detail.component';
+import {CommitteesComponent} from './committees/committees.component';
+import {CommitteeDetailComponent} from './committees/committee-detail/committee-detail.component';
+import {SponsorsComponent} from './sponsors/sponsors.component';
+import {SponsorDetailComponent} from './sponsors/sponsor-detail/sponsor-detail.component';
 
 const memberRoutes: Routes = [
   // Member routes goes here
@@ -32,6 +36,16 @@ const memberRoutes: Routes = [
       {
         path: 'faculties', component: FacultiesComponent, children: [
           {path: ':id', component: FacultyDetailComponent}
+        ]
+      },
+      {
+        path: 'committees', component: CommitteesComponent, children: [
+          {path: ':id', component: CommitteeDetailComponent}
+        ]
+      },
+      {
+        path: 'sponsors', component: SponsorsComponent, children: [
+          {path: ':id', component: SponsorDetailComponent}
         ]
       },
       {path: 'profile', component: ProfileComponent}

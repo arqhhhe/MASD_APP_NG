@@ -1,0 +1,18 @@
+<div>{{ committee.name}}</div>
+<mat-card *ngFor="let committeeMember of committee.committeeMembers" class="mt-3">
+  <mat-card-content>
+
+    <div class="row content">
+      <div class="col col-sm-3">{{ committeeMember.first_name }} {{ committeeMember.last_name }}</div>
+    </div>
+    <div class="row content">
+      <div class="col col-sm-3">Email</div>
+      <div class="col">{{ committeeMember.email }}</div>
+    </div>
+    <div class="row content">
+      <div class="col col-sm-3">Phone</div>
+      <div class="col">{{ committeeMember.phone}}</div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
