@@ -52,9 +52,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     switch (action) {
       case  'show':
         $('.hideable').closest('.mat-step').show();
+        $('.payment').closest('.mat-step').find(' .mat-step-icon-state-number').find('.ng-star-inserted').html('7');
         break;
       case 'hide':
         $('.hideable').closest('.mat-step').hide();
+        setTimeout(() => {
+          $('.payment').closest('.mat-step').find(' .mat-step-icon-state-number').find('.ng-star-inserted').html('4');
+        }, 700);
+
         break;
     }
   }
@@ -125,7 +130,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       response => {
         console.log('response', response);
         // @ts-ignore
-        if (response.status) {
+        if (response.status && JSON.parse(response.data.config).code === code) {
           this.domain = response.data;
           this.isCodeCompleted = true;
           this.getAndSetSelectListValues(this.domain.id);

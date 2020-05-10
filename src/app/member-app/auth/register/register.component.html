@@ -7,8 +7,7 @@
         <mat-card class="register-card">
           <mat-card-header class="justify-content-center">
             <div mat-card-avatar class="mobile-arq-icon"></div>
-            <mat-card-title class="text-left">Register</mat-card-title>
-            <mat-card-subtitle>Fill your member profile</mat-card-subtitle>
+            <mat-card-title class="text-left mt-12">Register</mat-card-title>
           </mat-card-header>
           <mat-card-content class="justify-content-center">
 
@@ -27,7 +26,7 @@
                            #code="ngModel"
                            required>
                     <mat-icon matSuffix>vpn_key</mat-icon>
-                    <mat-hint>Hint</mat-hint>
+                    <mat-hint>PTA provided security code</mat-hint>
                     <mat-error *ngIf="code.invalid">Invalid Code!</mat-error>
                   </mat-form-field>
                 </div>
@@ -109,7 +108,7 @@
                 <div id="account"
                      ngModelGroup="account"
                      #account="ngModelGroup">
-                  <ng-template matStepLabel class="lead">Account Information</ng-template>
+                  <ng-template matStepLabel class="lead">Account Email</ng-template>
                   <div class="form-group">
                     <mat-form-field>
                       <mat-label>Email</mat-label>
@@ -121,24 +120,10 @@
                              email
                              required>
                       <mat-icon matSuffix>email</mat-icon>
-                      <mat-hint>Hint</mat-hint>
-                      <mat-error *ngIf="email.invalid">Invalid Email!</mat-error>
+                      <!--<mat-hint>Hint</mat-hint>
+                      <mat-error *ngIf="email.invalid">Invalid Email!</mat-error>-->
                     </mat-form-field>
                   </div>
-<!--                  <div class="form-group">-->
-<!--                    <mat-form-field>-->
-<!--                      <mat-label>Password</mat-label>-->
-<!--                      <input matInput-->
-<!--                             placeholder=""-->
-<!--                             ngModel type="password"-->
-<!--                             name="password"-->
-<!--                             #password="ngModel"-->
-<!--                             required>-->
-<!--                      <mat-icon matSuffix>security</mat-icon>-->
-<!--                      <mat-hint>Hint!</mat-hint>-->
-<!--                      <mat-error *ngIf="password.invalid">Invalid Password!</mat-error>-->
-<!--                    </mat-form-field>-->
-<!--                  </div>-->
                 </div>
                 <div class="d-flex flex-row justify-content-end">
                   <button mat-button matStepperPrevious type="button">Back</button>
@@ -506,13 +491,16 @@
 
 
               <mat-step>
-                <ng-template matStepLabel class="lead">Payment</ng-template>
+                <ng-template matStepLabel class="lead"><span class="payment">Payment</span></ng-template>
 
-
+                <blockquote *ngIf="firstName.valid" class="blockquote text-left">
+                  <p class="mb-0">Hi {{ firstName.value}} {{ lastName.value}}</p>
+                  <footer class="blockquote-footer"><cite title="Source Title">You almost done!</cite></footer>
+                </blockquote>
 
                 <mat-card class="payment-options-card">
                   <mat-card-header>
-                    <mat-card-title>Schools & Member Fees</mat-card-title>
+                    <mat-card-title><p class="lead">Schools & Member Fees</p></mat-card-title>
                   </mat-card-header>
                   <mat-card-content>
                     <table class="table table-borderless text-left">
@@ -541,7 +529,7 @@
 
                 <mat-card class="payment-options-card">
                   <mat-card-header>
-                    <mat-card-title>Payment Options</mat-card-title>
+                    <mat-card-title><p class="lead">Payment Options</p></mat-card-title>
                   </mat-card-header>
                   <mat-card-content>
                     <mat-list>
@@ -585,7 +573,6 @@
           <mat-card-header class="justify-content-center">
             <div mat-card-avatar class="mobile-arq-icon"></div>
             <mat-card-title class="text-left">Register</mat-card-title>
-            <mat-card-subtitle>Fill your member profile</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="justify-content-center">
             <p class="lead">Congrtulations!</p>
@@ -601,8 +588,7 @@
       <mat-card class="register-card">
         <mat-card-header class="justify-content-center">
           <div mat-card-avatar class="mobile-arq-icon"></div>
-          <mat-card-title class="text-left">Register</mat-card-title>
-          <mat-card-subtitle>Fill your member profile</mat-card-subtitle>
+          <mat-card-title class="text-left mt-3">Register</mat-card-title>
         </mat-card-header>
         <mat-card-content class="justify-content-center">
           <p class="lead">Attention Please!</p>
