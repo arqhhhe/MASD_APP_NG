@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://v2.schooldirectory.loc',
-  apiEndPoint: 'http://v2.schooldirectory.loc/api',
+  baseUrl: 'http://masd.test',
+  apiEndPoint: 'http://masd.test/api',
 };
 
 /*
