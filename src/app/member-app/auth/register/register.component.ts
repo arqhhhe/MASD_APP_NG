@@ -2,12 +2,14 @@ import {environment} from '../../../../environments/environment';
 import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, AfterContentChecked, OnDestroy, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MockDataService} from '../../../shared/mock-data.service';
-import {MatDialog, MatStepper} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
 import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NgForm, NgModel, NgModelGroup} from '@angular/forms';
 import {PaymentDialogStripeComponent} from './payment-dialog-stripe/payment-dialog-stripe.component';
 import * as _ from 'lodash';
+import {PaymentDialogFirstDataComponent} from './payment-dialog-first-data/payment-dialog-first-data.component';
 
 @Component({
   selector: 'masd-register',
@@ -29,6 +31,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   public isProfileExist = false;
   public isRegistrationSuccessful = false;
   public isMemberExist = false;
+  public paymentMethods: any;
 
 
   @ViewChild('registrationForm', {static: false}) registrationForm: NgForm;
@@ -125,13 +128,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onValidateCode(stepper: MatStepper, code) {
-    this.httpClient.get<{status: any, data: any, meta: any}>(`${environment.apiEndPoint}/code/${code}`).subscribe(
+  onValidateSecurityCode(stepper: MatStepper, securityCode) {
+    this.httpClient.get<{status: any, data: any, meta: any}>(`${environment.apiEndPoint}/code/${securityCode}`).subscribe(
       response => {
         console.log('response', response);
         // @ts-ignore
-        if (response.status && JSON.parse(response.data.config).code === code) {
+        if (response.status && JSON.parse(response.data.config).security_code === securityCode) {
           this.domain = response.data;
+          this.paymentMethods = JSON.parse(response.data.config).payment_methods;
+          console.log(this.paymentMethods);
           this.isCodeCompleted = true;
           this.getAndSetSelectListValues(this.domain.id);
 
@@ -352,6 +357,17 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
 
+  openCreditCardPaymentDialog(method): void {
+    console.log(method);
+    switch (method) {
+      case 'stripe_connect':
+        this.openStripePaymentDialog();
+        break;
+      case 'first_data':
+        this.openFirstDataPaymentDialog();
+        break;
+    }
+  }
 
   openStripePaymentDialog(): void {
     const dialogRef = this.dialog.open(PaymentDialogStripeComponent, {
@@ -367,6 +383,30 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       console.log('The dialog was closed', result);
       if ('object' in result && result.object === 'token') {
         this.onSubmit(this.registrationForm, {method: 'stripe', meta: result});
+      } else {
+        this.snackBar.open(result.message, 'Close', {
+          duration: this.snackBarNotificationDuration,
+          verticalPosition: 'bottom'
+        });
+      }
+    });
+  }
+
+  openFirstDataPaymentDialog(): void {
+    const dialogRef = this.dialog.open(PaymentDialogFirstDataComponent, {
+      width: '400px',
+      disableClose: true,
+      autoFocus: true,
+      data: {
+        totalAmount: this.paymentDetail.total,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+
+      if (result) {
+        this.onSubmit(this.registrationForm, {method: 'firstData', meta: result});
       } else {
         this.snackBar.open(result.message, 'Close', {
           duration: this.snackBarNotificationDuration,

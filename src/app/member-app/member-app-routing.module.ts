@@ -14,6 +14,7 @@ import {CommitteesComponent} from './committees/committees.component';
 import {CommitteeDetailComponent} from './committees/committee-detail/committee-detail.component';
 import {SponsorsComponent} from './sponsors/sponsors.component';
 import {SponsorDetailComponent} from './sponsors/sponsor-detail/sponsor-detail.component';
+import {CalendarComponent} from './calendar/calendar.component';
 
 const memberRoutes: Routes = [
   // Member routes goes here
@@ -48,7 +49,8 @@ const memberRoutes: Routes = [
           {path: ':id', component: SponsorDetailComponent}
         ]
       },
-      {path: 'profile', component: ProfileComponent}
+      {path: 'profile', component: ProfileComponent},
+      {path: 'calendar', component: CalendarComponent},
     ]
   },
 

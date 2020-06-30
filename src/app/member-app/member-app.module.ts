@@ -22,7 +22,11 @@ import { CommitteeDetailComponent } from './committees/committee-detail/committe
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { SponsorListComponent } from './sponsors/sponsor-list/sponsor-list.component';
 import { SponsorDetailComponent } from './sponsors/sponsor-detail/sponsor-detail.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
+
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
     declarations: [
@@ -42,14 +46,16 @@ import { SponsorDetailComponent } from './sponsors/sponsor-detail/sponsor-detail
         CommitteeDetailComponent,
         SponsorsComponent,
         SponsorListComponent,
-        SponsorDetailComponent
+        SponsorDetailComponent,
+        CalendarComponent
     ],
   imports: [
     CommonModule,
     MemberAppRoutingModule,
     AuthModule,
     CustomMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ]
 })
 export class MemberAppModule {

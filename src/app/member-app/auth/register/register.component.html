@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="d-flex flex-row justify-content-end">
-                  <button mat-button type="button" (click)="onValidateCode(stepper, code.value)">Next</button>
+                  <button mat-button type="button" (click)="onValidateSecurityCode(stepper, code.value)">Next</button>
                 </div>
               </mat-step>
               <mat-step [completed]="isConsentCompleted" [editable]="isEditable">
@@ -533,21 +533,37 @@
                   </mat-card-header>
                   <mat-card-content>
                     <mat-list>
-                      <div mat-subheader>Credit Card</div>
-                      <mat-list-item>
-                        <mat-icon mat-list-icon>credit_card</mat-icon>
-                        <div mat-line>
-                          <button mat-raised-button color="primary" (click)="openStripePaymentDialog()" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with card</button>
-                        </div>
-                      </mat-list-item>
-                      <mat-divider></mat-divider>
-                      <div mat-subheader>Check</div>
-                      <mat-list-item>
-                        <mat-icon mat-list-icon>attach_money</mat-icon>
-                        <div mat-line>
-                          <button mat-raised-button color="primary" (click)="openCheck()" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with Check</button>
-                        </div>
-                      </mat-list-item>
+                      <div *ngFor="let paymentMethod of paymentMethods">
+                        <div mat-subheader>{{ paymentMethod.title }}</div>
+                        <mat-list-item>
+                          <mat-icon mat-list-icon *ngIf="paymentMethod.title == 'Credit Card'">credit_card</mat-icon>
+                          <mat-icon mat-list-icon *ngIf="paymentMethod.title == 'Check'">attach_money</mat-icon>
+                          <div mat-line *ngIf="paymentMethod.title == 'Credit Card'">
+                            <button mat-raised-button color="primary" (click)="openCreditCardPaymentDialog(paymentMethod.name)" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with card</button>
+                          </div>
+                          <div mat-line *ngIf="paymentMethod.title == 'Check'">
+                            <button mat-raised-button color="primary" (click)="openCheck()" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with Check</button>
+                          </div>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                      </div>
+
+<!--                      <div mat-subheader>Credit Card</div>-->
+<!--                      <mat-list-item>-->
+<!--                        <mat-icon mat-list-icon>credit_card</mat-icon>-->
+<!--                        <div mat-line>-->
+<!--                          <button mat-raised-button color="primary" (click)="openStripePaymentDialog()" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with card</button>-->
+<!--                          <button mat-raised-button color="primary" (click)="openFirstDataPaymentDialog()" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with card</button>-->
+<!--                        </div>-->
+<!--                      </mat-list-item>-->
+<!--                      <mat-divider></mat-divider>-->
+<!--                      <div mat-subheader>Check</div>-->
+<!--                      <mat-list-item>-->
+<!--                        <mat-icon mat-list-icon>attach_money</mat-icon>-->
+<!--                        <div mat-line>-->
+<!--                          <button mat-raised-button color="primary" (click)="openCheck()" type="button" class="float-right">Pay {{ paymentDetail.total|currency }} with Check</button>-->
+<!--                        </div>-->
+<!--                      </mat-list-item>-->
                     </mat-list>
                   </mat-card-content>
                 </mat-card>

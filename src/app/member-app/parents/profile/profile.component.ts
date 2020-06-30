@@ -1,9 +1,10 @@
 import {environment} from '../../../../environments/environment';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ContextService} from '../../../shared/context.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {AuthService} from '../../../shared/auth.service';
 
 @Component({
   selector: 'masd-profile',
@@ -32,17 +33,33 @@ export class ProfileComponent {
     private httpClient: HttpClient,
     private context: ContextService,
     private snackBar: MatSnackBar,
+    private auth: AuthService,
   ) { }
 
   onSubmitChangePassword() {
     console.log('onSubmit');
     console.log('context', this.context);
-    this.changePasswordForm.value.memberId = this.context.member.id
+    this.changePasswordForm.value.memberId = this.context.member.id;
     console.warn(this.changePasswordForm.value);
-    this.httpClient.post<any>(environment.apiEndPoint + '/changePassword', {changePasswordForm: this.changePasswordForm.value}).subscribe(
+
+    const token = this.auth.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+
+    this.httpClient.post<any>(
+      environment.apiEndPoint + '/changePassword',
+      {changePasswordForm: this.changePasswordForm.value},
+      httpOptions
+    ).subscribe(
       (response) => {
         console.log('onSubmitChangePassword: response', response);
-        if(response.status){
+        if (response.status) {
           this.isPasswordChanged = true;
           this.snackBar.open('Password changed successfully!', 'Close', {
             duration: this.snackBarNotificationDuration,

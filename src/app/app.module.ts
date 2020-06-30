@@ -14,6 +14,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from './shared/auth.service';
 
 
+// import { NgxMaskModule, IConfig } from 'ngx-mask';
+//
+// export let options: Partial<IConfig> | (() => Partial<IConfig>);
+
 @NgModule({
   declarations: [
     AppComponent
@@ -29,6 +33,7 @@ import {AuthService} from './shared/auth.service';
     LayoutModule,
     MemberAppModule,
     AdminAppModule,
+    // NgxMaskModule.forRoot(),
   ],
   providers: [MockDataService, AuthService],
   bootstrap: [AppComponent]
