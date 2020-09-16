@@ -1,0 +1,11 @@
+table{
+    width: 100%;
+}
+
+.order-heading{
+    font-size: 16px;
+    
+}
+.amount-container{
+    color: #f44336;
+}

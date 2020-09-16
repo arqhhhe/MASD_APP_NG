@@ -29,9 +29,11 @@ import {AuthService} from './shared/auth.service';
     LayoutModule,
     MemberAppModule,
     AdminAppModule,
+    
   ],
   providers: [MockDataService, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {
 }

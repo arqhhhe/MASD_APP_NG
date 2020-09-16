@@ -58,6 +58,7 @@ export class ParentListComponent implements OnInit {
 
   loadDetail(familyId) {
     this.detailLoaded.emit({id: familyId});
+    //console.log(this.detailLoaded);
     this.router.navigate(['parents', familyId]);
 
   }

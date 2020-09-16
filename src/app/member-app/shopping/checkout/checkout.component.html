@@ -1,0 +1,31 @@
+<!-- 
+<h1 mat-dialog-title>Checkout Payment</h1>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+      <mat-card>
+      
+        <div class="container-fuild">
+          <form #checkout="checkoutForm" (ngSubmit)="onSubmitCredit(checkout)" class="checkout">
+            <masd-credit-card-payment></masd-credit-card-payment>
+            <label for="card-info">Card Info</label>
+            <div id="form-row">
+                    <div id="card-info" #cardInfo class="pt-3"></div>
+                    <div class="row text-center">
+                      <button id="submit-button" type="submit" mat-flat-button color="warn">
+                          Pay ${{data.amount | number: '1.2-2'}}
+                      </button>
+                      <mat-error id="card-errors" role="alert" *ngIf="cardError">
+                          <mat-icon style="color: #f44336">cancel</mat-icon>
+                          &nbsp;{{ cardError }}
+                      </mat-error>
+                  </div>
+            </div>
+          </form>
+        </div>
+        <div class="container-fuild">
+          <form [formGroup]="creditpaymentform" (ngSubmit)="onSubmitCredit(creditpaymentform.value)">
+            <masd-paypal-payment></masd-paypal-payment>
+          </form>
+        </div>
+      </mat-card>
+</div> -->

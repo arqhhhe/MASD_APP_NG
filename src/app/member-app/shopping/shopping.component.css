@@ -1,0 +1,13 @@
+.store_card{
+  background-color:#fafafa;
+  box-shadow: none;
+  border: 1px solid gray;
+  
+}
+.store-title{
+    font-size:16px;
+    cursor: pointer;
+}
+.store-title:hover{
+    color:#f44336;
+}

@@ -1,0 +1,21 @@
+<div class="container-fuild">
+    <div class="row" *ngFor="let school of stores.schools; let i = index;">
+        <div class="col-lg-12 pb-2">
+            <h4>{{school.name}}</h4>
+            <mat-divider></mat-divider>
+        </div>
+   
+        <div class="row ml-5 container-fuild">
+            <mat-card class="col-xl-3 col-lg-3 col-md-2 col-sm-12 store_card mr-5 mb-2" *ngFor="let store of school.stores; let i = index;">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                  </mat-card-header>
+                <mat-card-content>     
+                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-title class="store-title" (click)="loadProducts(store.id,store.school_id);">{{store.store_name}}</mat-card-title>
+                    <!-- <mat-card-subtitle>{{store.description}}</mat-card-subtitle> -->
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>   
+</div>

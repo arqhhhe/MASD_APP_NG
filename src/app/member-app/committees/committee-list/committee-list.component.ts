@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../../../shared/auth.service';
 import {ContextService} from '../../../shared/context.service';
 import {environment} from '../../../../environments/environment';
+//import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'masd-committee-list',
@@ -31,9 +32,10 @@ export class CommitteeListComponent implements OnInit {
         'Authorization': 'Bearer ' + token
       })
     };
-
+    
     this.httpClient.get(environment.apiEndPoint + `/committees/${this.context.meta.current.school.id}`, httpOptions).subscribe(
       (response) => {
+        
         console.log('Success!');
         console.log(response);
         this.committees = response;
@@ -41,6 +43,7 @@ export class CommitteeListComponent implements OnInit {
       },
       error => {
         console.log('Error!', error);
+        
       },
       () => {
         console.log('HTTP request completed.');

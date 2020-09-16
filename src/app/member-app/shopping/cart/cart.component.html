@@ -1,0 +1,84 @@
+
+<div class="container-fuild" *ngIf="cart_detail.cart_detail.length > 0;">
+    <div class="row" class="text-center">
+        <h3>Your Shopping Cart</h3>
+    </div> 
+    <mat-divider></mat-divider>
+    <div class="row">
+      <div class="col-lg-9 prod-container">
+        <div class="row chil-prod-container" *ngFor="let cart of cart_detail.cart_detail;  let i = index;">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 img-container">
+              <img src="http://www.pngall.com/wp-content/uploads/4/Pepperoni-Dominos-Pizza-PNG-Free-Download.png" width="150"/>
+          </div>
+          
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <mat-card-title class="prod-name row">{{cart.product_name}}</mat-card-title>
+              <div class="row prod-sku-container">
+                  <label class="col-lg-2 text-center">Sku:</label>
+                  <label class="col-lg-6 text-center">{{cart.sku}}</label>
+              </div>
+              <div class="row child-name">
+                <label class="col-lg-2 text-center">Student:</label>
+                <label class="col-lg-6 text-center">{{cart.first_name}} {{cart.last_name}}</label>
+              </div>
+              <div class="row prod-price-container">
+                <label class="col-lg-3 text-left">Price:</label>
+                <label class="col-lg-5 text-left">${{cart.price |  number: '1.2-2'}}</label>
+              </div>
+          </div> 
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="row prod-qty-container col-lg-1">
+              <!-- <label class="col-lg-3">Price:</label> -->
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Qty" [value]=cart.qty (keyup.enter) = "cartUpdate($event,i,cart.id)" />
+                </mat-form-field>
+                <label class="col-lg-1 update-response">{{update_response}}</label>
+            </div>
+            <mat-icon aria-hidden="false" aria-label="Example delete icon" color="warn" class="col-lg-1 delet-button" (click)="deletCart(cart.id)">delete</mat-icon>
+          </div>
+      </div>
+      </div> 
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <mat-card>
+            <mat-card-title>Total Amount</mat-card-title>
+            <div class="row">
+              <mat-card-subtitle class="col-lg-6">Amount:</mat-card-subtitle>
+              <mat-card-subtitle class="col-lg-6">${{tot_price |  number: '1.2-2'}}</mat-card-subtitle>
+            </div>
+            <div class="row">
+              <mat-card-subtitle class="col-lg-6">Shipping:</mat-card-subtitle>
+              <mat-card-subtitle class="col-lg-6">Free</mat-card-subtitle>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row pt-3">
+              <mat-card-subtitle class="col-lg-6 font-weight-bold amount-container" color="warn">Total Amount:</mat-card-subtitle>
+              <mat-card-subtitle class="col-lg-6 font-weight-bold amount-container" color="warn">${{tot_price |  number: '1.2-2'}}</mat-card-subtitle>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="fill" class="col-lg-12" >
+                <mat-label>Select Payment Method</mat-label>
+                <mat-select (selectionChange)="showingCheckOut($event.value)">
+                  <mat-option *ngFor="let dc of cart_detail.domain_payment_config" [value]="dc.id">
+                    {{dc.title}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="row pt-3 pl-5" *ngIf="payment_option == 5 || payment_option == 2">
+              <button mat-flat-button color="warn" class="ml-5" (click)="openPaymentDialog()">CheckOut</button>
+            </div>
+            <div class="row pt-3 pl-5" *ngIf="payment_option == 1">
+              <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+        </mat-card>
+      </div>
+  </div>
+</div> 
+<div class="container-fluid" *ngElse>
+  <div class="row" class="text-center">
+    <h3>Your Shopping Cart is Empty</h3>
+  </div> 
+  <button mat-flat-button color="warn"  routerLink='/shopping/stores'>Continue Shopping</button>
+</div>
+<mat-divider></mat-divider>  

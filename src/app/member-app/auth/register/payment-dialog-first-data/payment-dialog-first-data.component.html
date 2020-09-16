@@ -1,0 +1,94 @@
+<h1 mat-dialog-title>Credit Card Info</h1>
+<div mat-dialog-content>
+  <form [formGroup]="firstDataCCInfoForm" (ngSubmit)="onSubmitFirstDataCCInfoForm()">
+    <div class="form-row">
+
+      <div id="card-info" #cardInfo>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-default">
+
+                <div class="panel-body">
+
+                  <div class="row">
+                    <div class="col-4">
+                      <mat-form-field>
+                        <mat-label>Type</mat-label>
+                        <mat-select formControlName="cardType" required>
+                          <mat-option value="visa"><img src="https://img.icons8.com/material/24/000000/visa--v1.png"/> Visa</mat-option>
+                          <mat-option value="master"><img src="https://img.icons8.com/material/24/000000/mastercard.png"/> Master</mat-option>
+                          <mat-option value="amex"><img src="https://img.icons8.com/material/24/000000/amex.png"/> American Express</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-8">
+                      <mat-form-field>
+                        <mat-label>Number</mat-label>
+                        <input matInput
+                               formControlName="cardNumber"
+                               placeholder=""
+                               type="text"
+                               mask="0000 0000 0000 0000"
+                               required>
+                        <mat-icon matSuffix>payment</mat-icon>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="row">
+                        <div class="col">
+                          <mat-form-field>
+                            <mat-label>MM</mat-label>
+                            <input matInput
+                                   formControlName="expireMonth"
+                                   placeholder=""
+                                   type="text"
+                                   mask="00"
+                                   required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col">
+                          <mat-form-field>
+                            <mat-label>YYYY</mat-label>
+                            <input matInput
+                                   formControlName="expireYear"
+                                   placeholder=""
+                                   type="text"
+                                   mask="0000"
+                                   required>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <mat-form-field>
+                        <mat-label>CVC</mat-label>
+                        <input matInput
+                               formControlName="cvc"
+                               placeholder=""
+                               type="text"
+                               mask="000"
+                               required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3">
+                <button type="submit" mat-raised-button color="primary" class="btn-block">Pay ${{ data.totalAmount}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<hr class="mt-5">
+<div mat-dialog-actions class="justify-content-end">
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>

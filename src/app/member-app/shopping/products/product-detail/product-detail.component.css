@@ -1,0 +1,25 @@
+.mat-drawer-container{
+    background-color: white !important;
+}
+
+.product-card{
+    box-shadow: none;
+    border:none;
+}
+.product-val{
+    font-size: 16px;
+    /* color:#f44336; */
+    color:black;
+}
+.price{
+     color:#f44336; 
+     font-weight: bold;
+}
+.map-price{
+    text-decoration-line: line-through;
+    font-weight: bold;
+}
+.add-to-cart{
+    margin-left:50%;
+    margin-top:20px;
+}

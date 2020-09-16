@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
+
 import {MemberAppRoutingModule} from './member-app-routing.module';
 import {HomeComponent} from './home/home.component';
 import {AuthModule} from './auth/auth.module';
@@ -22,6 +23,16 @@ import { CommitteeDetailComponent } from './committees/committee-detail/committe
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { SponsorListComponent } from './sponsors/sponsor-list/sponsor-list.component';
 import { SponsorDetailComponent } from './sponsors/sponsor-detail/sponsor-detail.component';
+import { ShoppingComponent } from './shopping/shopping.component';
+import { StoresComponent } from './shopping/stores/stores.component';
+import { ProductsComponent } from './shopping/products/products.component';
+import { CartComponent } from './shopping/cart/cart.component';
+import { ReviewComponent } from './shopping/review/review.component';
+import { ThanksComponent } from './shopping/thanks/thanks.component';
+import { ProductDetailComponent } from './shopping/products/product-detail/product-detail.component';
+// import { CheckoutComponent } from './shopping/checkout/checkout.component';
+import { CreditCardPaymentComponent } from './shopping/checkout/credit-card-payment/credit-card-payment.component';
+import { PaypalPaymentComponent } from './shopping/checkout/paypal-payment/paypal-payment.component';
 
 
 @NgModule({
@@ -42,15 +53,27 @@ import { SponsorDetailComponent } from './sponsors/sponsor-detail/sponsor-detail
         CommitteeDetailComponent,
         SponsorsComponent,
         SponsorListComponent,
-        SponsorDetailComponent
+        SponsorDetailComponent,
+        ShoppingComponent,
+        StoresComponent,
+        ProductsComponent,
+        CartComponent,
+        ReviewComponent,
+        ThanksComponent,
+        ProductDetailComponent,
+        // CheckoutComponent,
+        CreditCardPaymentComponent,
+        PaypalPaymentComponent
     ],
   imports: [
     CommonModule,
     MemberAppRoutingModule,
     AuthModule,
     CustomMaterialModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  
+  ],
+  
 })
 export class MemberAppModule {
 }

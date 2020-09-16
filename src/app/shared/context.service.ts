@@ -13,7 +13,9 @@ export class ContextService {
   private _schools: any;
   private _domain: any;
   private _meta: any;
-
+  private _store:any;
+  private _cart:any;
+  
   get auth(): any {
     return this._auth || this.getFromStorageContext( 'auth');
   }
@@ -73,13 +75,24 @@ export class ContextService {
   get meta(): any {
     return this._meta || this.getFromStorageContext( 'meta');
   }
-
   set meta(value: any) {
-    this._meta = value;
+     this._meta = value;
   }
 
-  constructor() {
+  get cart(): any {
+    return this._cart || this.getFromStorageContext( 'cart');
   }
+  set cart(value: any) {
+     this._cart = value;
+  }
+  // set store(value:any){
+  //   this._store = value;
+  // }
+  // get store():any{
+  //   return this._store || this.getFromStorageContext( 'store');
+  // }
+  // constructor() {
+  // }
 
   getFromStorageContext( property: string) {
     if ('context' in sessionStorage) {

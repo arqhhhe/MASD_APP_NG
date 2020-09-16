@@ -1,0 +1,32 @@
+<div class="container-fuild">
+    <div class="row">
+        <h3 class="pl-3">{{products[0].store.store_name}}</h3>
+       
+    </div>
+    <hr>
+    <div class="row p-0 pl-5 product-card">
+        
+        <mat-card class="col-xs-1 col-sm-2 col-md-3 col-lg-3 mr-3 mt-2" *ngFor="let product of display_products; let i = index;">
+            <img src="http://www.pngall.com/wp-content/uploads/4/Pepperoni-Dominos-Pizza-PNG-Free-Download.png" width="250"/>
+            <hr>
+            <mat-card-title class="product-title text-center pb-2" (click)="onDetailLoad(product.id)">{{product.product_name}}</mat-card-title>
+            <div class="row price-container pb-2">
+                <label for="map_price" class="col-lg-4 product-label text-center">Price:</label>
+                <label class="col-lg-2 p-0 product-price pr-1">{{product.price}}$</label>
+    
+                <label for="price" class="col-lg-4 p-0 product-label pl-3">Stock:</label>
+                <label class="col-lg-2 p-0 product-stock">{{product.stock}}</label>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row text-center pt-2 add-to-cart-container">
+                <button mat-raised-button color="warn" class="ml-5">ADD TO CART</button>
+            </div>
+       </mat-card>
+    </div>
+    <div class="row text-right" style="padding-left:50% !important;">
+        <mat-paginator [length]="products_length"
+        [pageSize]="[default_size]"
+        [pageSizeOptions]="[6,12,18,24,30]" (page)="onPaginateChange($event);"></mat-paginator>
+    </div>
+</div>
+<!-- <router-outlet></router-outlet> -->

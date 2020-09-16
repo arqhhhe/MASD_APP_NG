@@ -2,7 +2,8 @@ import {environment} from '../../../../environments/environment';
 import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, AfterContentChecked, OnDestroy, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MockDataService} from '../../../shared/mock-data.service';
-import {MatDialog, MatStepper} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
 import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NgForm, NgModel, NgModelGroup} from '@angular/forms';
@@ -136,7 +137,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           this.getAndSetSelectListValues(this.domain.id);
 
           setTimeout(() => {
-            stepper.next();
+            stepper.next()
           }, 100);
         } else {
           this.snackBar.open('Security code does not exist!', 'Close', {
@@ -175,6 +176,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   setPaymentData(memberData) {
+    console.log(memberData);
     this.data.students.forEach(student => {
       // const {domain_id, domain, school_id, school, member_fee} = student;
       const pickedPaymentData = _.pick(student, ['domain_id', 'domain', 'school_id', 'school', 'member_fee']);
@@ -354,9 +356,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
 
   openStripePaymentDialog(): void {
+    console.log("openStripePaymentDialog");
     const dialogRef = this.dialog.open(PaymentDialogStripeComponent, {
       width: '400px',
-      disableClose: true,
+      disableClose: true, 
       autoFocus: true,
       data: {
         totalAmount: this.paymentDetail.total,

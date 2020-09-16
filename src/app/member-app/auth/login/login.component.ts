@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('loginForm', {static: false}) loginForm: NgForm;
   public error = false;
-
+ 
   constructor(
     private router: Router,
     private mockData: MockDataService,

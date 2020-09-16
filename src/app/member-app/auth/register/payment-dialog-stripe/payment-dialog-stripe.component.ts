@@ -51,7 +51,7 @@ export class PaymentDialogStripeComponent implements  OnDestroy, AfterViewInit{
       this.error = error.message;
     } else {
       this.error = null;
-    }
+    } 
     this.cd.detectChanges();
   }
 

@@ -1,0 +1,69 @@
+<div class="container-fuild">
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 p-0">
+            <mat-card class="product-card pr-4">
+                <img src="http://www.pngall.com/wp-content/uploads/4/Pepperoni-Dominos-Pizza-PNG-Free-Download.png" width="400" height="350" class="pl-5"/>
+            </mat-card>            
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-8 p-0">
+            
+            <mat-card class="product-card">
+                <mat-card-title class="col-lg-12 pt-1">{{product.product_name}}</mat-card-title>
+                <mat-divider></mat-divider>
+                <div class="row">
+                    <label class="col-lg-4 pt-3 pb-3 m-0 font-weight-bold pl-5">Store :</label>
+                    <mat-card-subtitle class="col-lg-5 pt-3 pb-3 m-0 product-val">{{product.store.store_name}}</mat-card-subtitle>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row">
+                    <label class="col-lg-4 pt-3 pb-3 m-0 font-weight-bold pl-5">SKU :</label>
+                    <mat-card-subtitle class="col-lg-5 pt-3 pb-3 m-0 product-val">{{product.sku}}</mat-card-subtitle>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row">
+                    <label class="col-lg-4 pt-3 pb-3 m-0 font-weight-bold pl-5">Market Price :</label>
+                    <mat-card-subtitle class="col-lg-8 pt-3 pb-3 m-0 product-val map-price">{{product.msrp}}$</mat-card-subtitle>
+                </div>              
+                <mat-divider></mat-divider>
+                <div class="row">
+                    <label class="col-lg-4 pt-3 pb-3 m-0 font-weight-bold pl-5">Price :</label>
+                    <mat-card-subtitle class="col-lg-8 pt-3 pb-3 m-0 product-val price">{{product.price}}$</mat-card-subtitle>
+                </div>
+                <mat-divider></mat-divider>
+                <form [formGroup]="cartForm" (ngSubmit)="onSubmit(cartForm.value)">
+                    <div class="row">
+                        <label class="col-lg-4 pt-3 pb-3 m-0 font-weight-bold pl-5">Child :</label>
+                        <mat-form-field appearance="fill" class="col-lg-8 pt-3 m-0" color="warn">
+                            <mat-label>Select Child</mat-label>
+                            <mat-select class="p-0 m-0" formControlName="child" placeholder="ID is required" required="true [(ngModel)]=uniqueID">   
+                                <mat-option *ngFor="let student of children.students" [value]="student.student_id">
+                                {{student.first_name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row">
+                        <label class="col-lg-4 pt-3 pb-3 m-0 font-weight-bold pl-5">QTY :</label>
+                        <mat-form-field appearance="fill" class="col-lg-8 pt-3 m-0" color="warn">
+                            <mat-label>QTY</mat-label>
+                            <mat-select class="p-0 m-0" formControlName="qty" placeholder="ID is required" required="true [(ngModel)]=uniqueID">   
+                                <mat-option [value]="1">1</mat-option>
+                                <mat-option [value]="2">2</mat-option>
+                                <mat-option [value]="3">3</mat-option>
+                                <mat-option [value]="4">4</mat-option>
+                                <mat-option [value]="5">5</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row pt-1">
+                        <button type="submit" mat-raised-button color="warn" class="col-lg-3 add-to-cart">ADD TO CART</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+

@@ -19,6 +19,13 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatTableModule} from '@angular/material/table';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { NgxPayPalModule } from 'ngx-paypal'; //Payapal module
 
 @NgModule({
   declarations: [],
@@ -41,7 +48,14 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatStepperModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule,
+    MatButtonToggleModule,
+    MatDatepickerModule,
+    MatTableModule,
+    MatGridListModule,
+    MatPaginatorModule,
+    NgxPayPalModule
   ],
   exports: [
     CommonModule,
@@ -61,7 +75,14 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatStepperModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule,
+    MatButtonToggleModule,
+    MatDatepickerModule,
+    MatTableModule,
+    MatGridListModule,
+    MatPaginatorModule,
+    NgxPayPalModule
   ]
 })
 export class CustomMaterialModule {

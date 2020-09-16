@@ -1,0 +1,71 @@
+<!-- <table class="example-full-width pt-3 row ml-2" cellspacing="0">
+    <tr class="col-lg-12 row">
+        <td class="col-lg-12 row">
+            <mat-form-field class="example-full-width col-lg-12" color="warn">
+                <mat-label>Name On the Card</mat-label>
+                <input matInput placeholder="Enter Card Name" forControlName ="card_name">
+                <mat-icon matSuffix color="warn">edit</mat-icon>
+            </mat-form-field>
+        </td>
+    </tr>
+</table>
+
+
+<table class="example-full-width row ml-2" cellspacing="0">
+    <tr class="col-lg-12 row">
+        <td class="col-lg-12 row">
+            <mat-form-field class="example-full-width col-lg-12" color="warn">
+            <mat-label>Card No.</mat-label>
+            <input matInput placeholder="Enter Card No." forControlName ="card_no">
+            <mat-icon matSuffix color="warn">edit</mat-icon>
+        </mat-form-field>
+        </td>
+    </tr> 
+</table>
+
+<table class="example-full-width row ml-2" cellspacing="0">
+    <tr class="col-lg-12 row">
+        <td class="col-lg-12 row">
+            <mat-form-field class="example-full-width col-lg-12" color="warn">
+                <mat-label>CVC Code</mat-label>
+                <input matInput placeholder="Enter CVC Code" forControlName ="cvc_code">
+                <mat-icon matSuffix color="warn">edit</mat-icon>
+            </mat-form-field>
+        </td>
+    </tr>
+</table>
+
+<table class="example-full-width row ml-2" cellspacing="0">
+    <tr class="col-lg-12 row">
+        <td class="col-lg-12 row">
+            <mat-form-field class="example-full-width col-lg-12" color="warn">
+                <mat-label>Expiration Date</mat-label>
+                <input matInput [matDatepicker]="picker" forControlName ="end_date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </td>
+    </tr>
+</table>
+
+<table class="example-full-width row ml-2" cellspacing="0">
+    <tr class="col-lg-12 row">
+        <td class="col-lg-12 row text-center">
+            <button type="submit" mat-raised-button color="warn" class="col-lg-12 row text-center">Pay: ${{tot_price |  number: '1.2-2'}}</button>
+        </td>
+    </tr>
+</table> -->
+
+<!-- <form (ngSubmit)="createStripeToken()" class="checkout"> -->
+<label for="card-info">Card Info</label>
+<div id="form-field">
+        <div id="card-info" #cardInfo></div>
+        <button id="submit-button" type="submit">
+            Pay ${{tot_price}}
+        </button>
+        <!-- <mat-error id="card-errors" role="alert" *ngIf="cardError">
+            <mat-icon style="color: #f44336">cancel</mat-icon>
+            &nbsp;{{ cardError }}
+        </mat-error> -->
+</div>
+<!-- </form> -->

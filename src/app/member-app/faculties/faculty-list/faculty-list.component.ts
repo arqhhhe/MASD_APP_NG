@@ -30,7 +30,7 @@ export class FacultyListComponent implements OnInit {
         'Authorization': 'Bearer ' + token
       })
     };
-
+    console.log(httpOptions);
     this.httpClient.get(environment.apiEndPoint + `/faculties/${this.context.meta.current.school.id}`, httpOptions).subscribe(
       (response) => {
         console.log('Success!');
